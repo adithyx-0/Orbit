@@ -1,0 +1,140 @@
+<mxfile host="app.diagrams.net" modified="2026-04-03" version="21.0.0">
+  <diagram name="Use Case Diagram" id="ucd">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- System Boundary -->
+        <mxCell id="sys" value="PROSIT System" style="shape=rect;fillColor=none;strokeColor=#1F3864;strokeWidth=3;fontStyle=1;fontSize=16;verticalAlign=top;align=center;spacingTop=8;rounded=1;arcSize=4;" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="1100" height="1200" as="geometry"/>
+        </mxCell>
+
+        <!-- ── ACTORS (Left Side) ── -->
+        <mxCell id="a2" value="Guest / New User" style="shape=umlActor;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="120" width="40" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="a1" value="Registered User" style="shape=umlActor;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="560" width="40" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="a3" value="Admin" style="shape=umlActor;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1080" width="40" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ── ACTORS (Right Side) ── -->
+        <mxCell id="a4" value="Android App" style="shape=umlActor;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1560" y="820" width="40" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="a5" value="Windows Agent" style="shape=umlActor;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1560" y="940" width="40" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="a6" value="Notification&#xa;Service" style="shape=umlActor;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;verticalLabelPosition=bottom;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1560" y="1060" width="40" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- ── USE CASES — Row 1: Auth (top) ── -->
+        <mxCell id="uc01" value="UC01&#xa;Register Account" style="ellipse;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="80" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc02" value="UC02&#xa;Login" style="ellipse;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="180" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc03" value="UC03&#xa;Logout" style="ellipse;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="280" width="180" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ── USE CASES — Row 2: Subscription Management (middle-left) ── -->
+        <mxCell id="uc04" value="UC04&#xa;Add Subscription" style="ellipse;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="400" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc05" value="UC05&#xa;Edit Subscription" style="ellipse;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="500" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc06" value="UC06&#xa;Delete Subscription" style="ellipse;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="600" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc07" value="UC07&#xa;Pause Subscription" style="ellipse;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="700" width="180" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ── USE CASES — Row 3: Profile ── -->
+        <mxCell id="uc17" value="UC17&#xa;Configure Profile" style="ellipse;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="820" width="180" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ── USE CASES — Column 2: Dashboard & Analytics (middle-right) ── -->
+        <mxCell id="uc08" value="UC08&#xa;View Dashboard" style="ellipse;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="750" y="400" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc09" value="UC09&#xa;View Analytics" style="ellipse;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="750" y="500" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc10" value="UC10&#xa;Set Goals" style="ellipse;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="750" y="600" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc11" value="UC11&#xa;Track Goal Progress" style="ellipse;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="750" y="700" width="180" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ── USE CASES — Column 3: Reports, Notifications, Device (right) ── -->
+        <mxCell id="uc12" value="UC12&#xa;Generate Report" style="ellipse;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="500" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc13" value="UC13&#xa;Receive Notification" style="ellipse;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="620" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc14" value="UC14&#xa;Send Android Usage" style="ellipse;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="800" width="180" height="65" as="geometry"/>
+        </mxCell>
+        <mxCell id="uc15" value="UC15&#xa;Send Windows Usage" style="ellipse;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="920" width="180" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ── USE CASES — Admin ── -->
+        <mxCell id="uc16" value="UC16&#xa;Manage Users" style="ellipse;fillColor=#ffe6cc;strokeColor=#d6b656;fontSize=11;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="400" y="1080" width="180" height="65" as="geometry"/>
+        </mxCell>
+
+        <!-- ── EDGES: Guest → Use Cases ── -->
+        <mxCell id="e1" style="endArrow=none;strokeColor=#82b366;" edge="1" source="a2" target="uc01" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e2" style="endArrow=none;strokeColor=#82b366;" edge="1" source="a2" target="uc02" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ── EDGES: Registered User → Auth ── -->
+        <mxCell id="e3" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc02" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e4" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc03" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ── EDGES: Registered User → Subscriptions ── -->
+        <mxCell id="e5" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc04" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e6" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc05" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e7" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc06" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e8" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc07" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ── EDGES: Registered User → Dashboard/Analytics/Goals ── -->
+        <mxCell id="e9" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc08" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e10" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc09" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e11" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc10" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e12" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc11" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ── EDGES: Registered User → Reports/Notifications/Profile ── -->
+        <mxCell id="e13" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc12" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e14" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc13" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e15" style="endArrow=none;strokeColor=#6c8ebf;" edge="1" source="a1" target="uc17" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ── EDGES: Right-side Actors ── -->
+        <mxCell id="e16" style="endArrow=none;strokeColor=#9673a6;" edge="1" source="a4" target="uc14" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e17" style="endArrow=none;strokeColor=#9673a6;" edge="1" source="a5" target="uc15" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="e18" style="endArrow=none;strokeColor=#d6b656;" edge="1" source="a6" target="uc13" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ── EDGES: Admin ── -->
+        <mxCell id="e19" style="endArrow=none;strokeColor=#d6b656;" edge="1" source="a3" target="uc16" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+        <!-- ── INCLUDE / EXTEND ── -->
+        <mxCell id="inc1" value="&lt;&lt;include&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;strokeColor=#6c8ebf;fontStyle=2;fontSize=10;" edge="1" source="uc04" target="uc02" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="inc2" value="&lt;&lt;include&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;strokeColor=#6c8ebf;fontStyle=2;fontSize=10;" edge="1" source="uc08" target="uc02" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ext1" value="&lt;&lt;extend&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;strokeColor=#b85450;fontStyle=2;fontSize=10;" edge="1" source="uc11" target="uc10" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="ext2" value="&lt;&lt;extend&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;strokeColor=#b85450;fontStyle=2;fontSize=10;" edge="1" source="uc13" target="uc12" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

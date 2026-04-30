@@ -1,0 +1,196 @@
+<mxfile host="app.diagrams.net" modified="2026-03-31" version="21.0.0">
+  <diagram name="DFD Level 0 — Context Diagram" id="dfd0">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" page="1" pageWidth="1100" pageHeight="880" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Title -->
+        <mxCell id="title" value="DFD Level 0 — Context Diagram" style="text;html=1;fontStyle=1;fontSize=16;fillColor=none;strokeColor=none;align=center;" vertex="1" parent="1">
+          <mxGeometry x="300" y="18" width="500" height="30" as="geometry"/>
+        </mxCell>
+
+        <!-- ── CENTRAL PROCESS (ellipse) ──────────────────── -->
+        <mxCell id="p0" value="0&#xa;PROSIT System&#xa;(AI-Powered Subscription&#xa;Intelligence)" style="ellipse;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="420" y="345" width="260" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- ── EXTERNAL ENTITIES (plain rectangles — Yourdon notation) ── -->
+
+        <!-- Guest / New User  ·  top-left -->
+        <mxCell id="e_guest" value="Guest / New User" style="rounded=0;whiteSpace=wrap;fontSize=11;fontStyle=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="30" y="60" width="150" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Registered User  ·  left-centre -->
+        <mxCell id="e_user" value="Registered User" style="rounded=0;whiteSpace=wrap;fontSize=11;fontStyle=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="30" y="390" width="150" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Admin  ·  bottom-left -->
+        <mxCell id="e_admin" value="Admin" style="rounded=0;whiteSpace=wrap;fontSize=11;fontStyle=1;fillColor=#ffe6cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="30" y="720" width="150" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Android Device  ·  top-right -->
+        <mxCell id="e_android" value="Android Device" style="rounded=0;whiteSpace=wrap;fontSize=11;fontStyle=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="920" y="175" width="150" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Windows Device  ·  right-centre -->
+        <mxCell id="e_windows" value="Windows Device" style="rounded=0;whiteSpace=wrap;fontSize=11;fontStyle=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="920" y="485" width="150" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- Notification Service  ·  bottom-centre -->
+        <mxCell id="e_notif" value="Notification Service" style="rounded=0;whiteSpace=wrap;fontSize=11;fontStyle=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="455" y="760" width="160" height="50" as="geometry"/>
+        </mxCell>
+
+        <!-- ═══════════════════════════════════════════════════
+             DATA FLOWS
+             Each bidirectional pair uses distinct entry/exit
+             points on the ellipse so arrows never overlap.
+        ════════════════════════════════════════════════════ -->
+
+        <!-- ── GUEST ↔ PROCESS ──────────────────────────── -->
+
+        <!-- df1  Guest → Process  (Registration data) -->
+        <mxCell id="df1" value="Registration data&#xa;(name, email, password)"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.12;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="e_guest" target="p0" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="300" y="85"/>
+              <mxPoint x="451" y="85"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- df2  Process → Guest  (Account confirmation) -->
+        <mxCell id="df2" value="Account confirmation"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=0;exitY=0.08;exitDx=0;exitDy=0;entryX=1;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="p0" target="e_guest" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="356"/>
+              <mxPoint x="360" y="30"/>
+              <mxPoint x="180" y="30"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ── REGISTERED USER ↔ PROCESS ──────────────── -->
+
+        <!-- df3  User → Process  (Login credentials, subscription data, goals) -->
+        <mxCell id="df3" value="Login credentials, subscription&#xa;data, goal definitions"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.38;entryDx=0;entryDy=0;"
+          edge="1" source="e_user" target="p0" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- df4  Process → User  (Dashboard, analytics, reports) -->
+        <mxCell id="df4" value="Dashboard, analytics, reports,&#xa;recommendations"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=0;exitY=0.62;exitDx=0;exitDy=0;entryX=1;entryY=0.65;entryDx=0;entryDy=0;"
+          edge="1" source="p0" target="e_user" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ── ADMIN ↔ PROCESS ────────────────────────── -->
+
+        <!-- df5  Admin → Process  (Admin actions) -->
+        <mxCell id="df5" value="Admin actions&#xa;(user management)"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=1;exitY=0.4;exitDx=0;exitDy=0;entryX=0.18;entryY=1;entryDx=0;entryDy=0;"
+          edge="1" source="e_admin" target="p0" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="738"/>
+              <mxPoint x="467" y="738"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- df6  Process → Admin  (User list & system status) -->
+        <mxCell id="df6" value="User list &amp; system status"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=0;exitY=0.82;exitDx=0;exitDy=0;entryX=1;entryY=0.6;entryDx=0;entryDy=0;"
+          edge="1" source="p0" target="e_admin" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="200" y="452"/>
+              <mxPoint x="200" y="750"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ── ANDROID ↔ PROCESS ──────────────────────── -->
+
+        <!-- df7  Android → Process  (App usage data) -->
+        <mxCell id="df7" value="App usage data&#xa;(app, duration, timestamp)"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=0;exitY=0.3;exitDx=0;exitDy=0;entryX=0.88;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="e_android" target="p0" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="750" y="190"/>
+              <mxPoint x="649" y="190"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- df8  Process → Android  (Agent config & ACK) -->
+        <mxCell id="df8" value="Agent config &amp; ACK"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=1;exitY=0.18;exitDx=0;exitDy=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;"
+          edge="1" source="p0" target="e_android" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="860" y="368"/>
+              <mxPoint x="860" y="210"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ── WINDOWS ↔ PROCESS ──────────────────────── -->
+
+        <!-- df9  Windows → Process  (Process usage data) -->
+        <mxCell id="df9" value="Process usage data&#xa;(app, window, duration)"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=0;exitY=0.38;exitDx=0;exitDy=0;entryX=1;entryY=0.4;entryDx=0;entryDy=0;"
+          edge="1" source="e_windows" target="p0" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- df10  Process → Windows  (Agent config & ACK) -->
+        <mxCell id="df10" value="Agent config &amp; ACK"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=1;exitY=0.62;exitDx=0;exitDy=0;entryX=0;entryY=0.62;entryDx=0;entryDy=0;"
+          edge="1" source="p0" target="e_windows" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ── NOTIFICATION SERVICE ↔ PROCESS ─────────── -->
+
+        <!-- df11  Process → Notification  (Notification payload) -->
+        <mxCell id="df11" value="Notification payload&#xa;(type, message, recipient)"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=0.38;exitY=1;exitDx=0;exitDy=0;entryX=0.2;entryY=0;entryDx=0;entryDy=0;"
+          edge="1" source="p0" target="e_notif" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="519" y="710"/>
+              <mxPoint x="487" y="710"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- df12  Notification → Process  (Delivery status) -->
+        <mxCell id="df12" value="Delivery status"
+          style="edgeStyle=orthogonalEdgeStyle;fontSize=10;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.62;entryY=1;entryDx=0;entryDy=0;"
+          edge="1" source="e_notif" target="p0" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="575" y="710"/>
+              <mxPoint x="581" y="710"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

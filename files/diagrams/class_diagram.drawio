@@ -1,0 +1,342 @@
+<mxfile host="app.diagrams.net" modified="2026-03-31" version="21.0.0">
+  <diagram name="Class Diagram" id="cls">
+    <mxGraphModel dx="1600" dy="1000" grid="1" gridSize="10" page="1" pageWidth="1470" pageHeight="1060" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ══════════════════════════════════════════════════
+             ROW 1 — ENTITY CLASSES
+        ════════════════════════════════════════════════════ -->
+
+        <!-- ── User ─────────────────────────────────────── -->
+        <mxCell id="c_user" value="User" style="swimlane;fontStyle=1;align=center;fillColor=#dae8fc;strokeColor=#6c8ebf;startSize=26;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="60" width="255" height="215" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_user_attr" value="- userId : UUID&#xa;- name : String&#xa;- email : String&#xa;- passwordHash : String&#xa;- createdAt : DateTime&#xa;- notifyPrefs : JSON" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_user">
+          <mxGeometry x="0" y="26" width="255" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_user_sep" value="" style="line;strokeColor=#6c8ebf;fillColor=none;" vertex="1" parent="c_user">
+          <mxGeometry x="0" y="126" width="255" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_user_meth" value="+ register()&#xa;+ login()&#xa;+ logout()&#xa;+ updateProfile()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_user">
+          <mxGeometry x="0" y="136" width="255" height="79" as="geometry"/>
+        </mxCell>
+
+        <!-- ── Subscription ──────────────────────────────── -->
+        <mxCell id="c_sub" value="Subscription" style="swimlane;fontStyle=1;align=center;fillColor=#d5e8d4;strokeColor=#82b366;startSize=26;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="345" y="60" width="275" height="240" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_sub_attr" value="- subId : UUID&#xa;- userId : UUID&#xa;- name : String&#xa;- cost : Float&#xa;- billingCycle : Enum&#xa;- category : Enum&#xa;- status : Enum&#xa;- startDate : Date&#xa;- nextRenewal : Date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_sub">
+          <mxGeometry x="0" y="26" width="275" height="148" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_sub_sep" value="" style="line;strokeColor=#82b366;fillColor=none;" vertex="1" parent="c_sub">
+          <mxGeometry x="0" y="174" width="275" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_sub_meth" value="+ create()    + update()    + delete()&#xa;+ pause()     + resume()    + getAll()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_sub">
+          <mxGeometry x="0" y="184" width="275" height="56" as="geometry"/>
+        </mxCell>
+
+        <!-- ── UsageRecord ───────────────────────────────── -->
+        <mxCell id="c_usage" value="UsageRecord" style="swimlane;fontStyle=1;align=center;fillColor=#e1d5e7;strokeColor=#9673a6;startSize=26;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="670" y="60" width="255" height="200" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_usage_attr" value="- recordId : UUID&#xa;- userId : UUID&#xa;- deviceType : Enum&#xa;- appName : String&#xa;- duration : Int&#xa;- timestamp : DateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_usage">
+          <mxGeometry x="0" y="26" width="255" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_usage_sep" value="" style="line;strokeColor=#9673a6;fillColor=none;" vertex="1" parent="c_usage">
+          <mxGeometry x="0" y="126" width="255" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_usage_meth" value="+ save()&#xa;+ getByUser()&#xa;+ getByDateRange()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_usage">
+          <mxGeometry x="0" y="136" width="255" height="64" as="geometry"/>
+        </mxCell>
+
+        <!-- ── Goal ──────────────────────────────────────── -->
+        <mxCell id="c_goal" value="Goal" style="swimlane;fontStyle=1;align=center;fillColor=#fff2cc;strokeColor=#d6b656;startSize=26;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="975" y="60" width="255" height="225" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_goal_attr" value="- goalId : UUID&#xa;- userId : UUID&#xa;- title : String&#xa;- metric : Enum&#xa;- targetValue : Float&#xa;- currentValue : Float&#xa;- deadline : Date&#xa;- status : Enum" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_goal">
+          <mxGeometry x="0" y="26" width="255" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_goal_sep" value="" style="line;strokeColor=#d6b656;fillColor=none;" vertex="1" parent="c_goal">
+          <mxGeometry x="0" y="156" width="255" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_goal_meth" value="+ create()          + update()&#xa;+ evaluateProgress()&#xa;+ markAchieved()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_goal">
+          <mxGeometry x="0" y="166" width="255" height="59" as="geometry"/>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════
+             ROW 2 — ENTITY CLASSES (computed / derived)
+        ════════════════════════════════════════════════════ -->
+
+        <!-- ── AnalyticsResult ──────────────────────────── -->
+        <mxCell id="c_ar" value="AnalyticsResult" style="swimlane;fontStyle=1;align=center;fillColor=#fff2cc;strokeColor=#d6b656;startSize=26;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="345" y="365" width="275" height="225" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_ar_attr" value="- resultId : UUID&#xa;- subId : UUID&#xa;- userId : UUID&#xa;- costPerHour : Float&#xa;- roiScore : Float&#xa;- utilizationRate : Float&#xa;- period : String&#xa;- computedAt : DateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_ar">
+          <mxGeometry x="0" y="26" width="275" height="130" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_ar_sep" value="" style="line;strokeColor=#d6b656;fillColor=none;" vertex="1" parent="c_ar">
+          <mxGeometry x="0" y="156" width="275" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_ar_meth" value="+ compute()&#xa;+ getBySubscription()&#xa;+ getSummary()    + getRecommendations()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_ar">
+          <mxGeometry x="0" y="166" width="275" height="59" as="geometry"/>
+        </mxCell>
+
+        <!-- ── Notification ──────────────────────────────── -->
+        <mxCell id="c_notif" value="Notification" style="swimlane;fontStyle=1;align=center;fillColor=#f8cecc;strokeColor=#b85450;startSize=26;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="670" y="365" width="255" height="195" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_notif_attr" value="- notifId : UUID&#xa;- userId : UUID&#xa;- type : Enum&#xa;- message : String&#xa;- status : Enum&#xa;- sentAt : DateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_notif">
+          <mxGeometry x="0" y="26" width="255" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_notif_sep" value="" style="line;strokeColor=#b85450;fillColor=none;" vertex="1" parent="c_notif">
+          <mxGeometry x="0" y="126" width="255" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_notif_meth" value="+ send()      + markRead()&#xa;+ getUnread() + getAll()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_notif">
+          <mxGeometry x="0" y="136" width="255" height="59" as="geometry"/>
+        </mxCell>
+
+        <!-- ── Report ────────────────────────────────────── -->
+        <mxCell id="c_report" value="Report" style="swimlane;fontStyle=1;align=center;fillColor=#f8cecc;strokeColor=#b85450;startSize=26;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="975" y="365" width="255" height="195" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_report_attr" value="- reportId : UUID&#xa;- userId : UUID&#xa;- period : String&#xa;- type : Enum&#xa;- filePath : String&#xa;- generatedAt : DateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_report">
+          <mxGeometry x="0" y="26" width="255" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_report_sep" value="" style="line;strokeColor=#b85450;fillColor=none;" vertex="1" parent="c_report">
+          <mxGeometry x="0" y="126" width="255" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_report_meth" value="+ generate()  + download()&#xa;+ getAll()    + delete()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_report">
+          <mxGeometry x="0" y="136" width="255" height="59" as="geometry"/>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════
+             ROW 3 — CONTROLLER CLASSES  (<<Control>>)
+        ════════════════════════════════════════════════════ -->
+
+        <!-- ── AuthController ───────────────────────────── -->
+        <mxCell id="c_auth" value="&lt;&lt;Control&gt;&gt;&#xa;AuthController" style="swimlane;fontStyle=3;align=center;fillColor=#ffe6cc;strokeColor=#d6b656;startSize=36;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="660" width="240" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_auth_meth" value="+ register(req, res)&#xa;+ login(req, res)&#xa;+ logout(req, res)&#xa;+ validateToken(token)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_auth">
+          <mxGeometry x="0" y="36" width="240" height="84" as="geometry"/>
+        </mxCell>
+
+        <!-- ── SubscriptionController ────────────────────── -->
+        <mxCell id="c_sc" value="&lt;&lt;Control&gt;&gt;&#xa;SubscriptionController" style="swimlane;fontStyle=3;align=center;fillColor=#ffe6cc;strokeColor=#d6b656;startSize=36;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="310" y="660" width="240" height="110" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_sc_meth" value="+ create(req, res)&#xa;+ update(req, res)&#xa;+ delete(req, res)&#xa;+ pause(req, res)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_sc">
+          <mxGeometry x="0" y="36" width="240" height="74" as="geometry"/>
+        </mxCell>
+
+        <!-- ── UsageController ───────────────────────────── -->
+        <mxCell id="c_uc" value="&lt;&lt;Control&gt;&gt;&#xa;UsageController" style="swimlane;fontStyle=3;align=center;fillColor=#ffe6cc;strokeColor=#d6b656;startSize=36;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="660" width="230" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_uc_meth" value="+ save(req, res)&#xa;+ getByUser(req, res)&#xa;+ aggregate(userId)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_uc">
+          <mxGeometry x="0" y="36" width="230" height="64" as="geometry"/>
+        </mxCell>
+
+        <!-- ── AnalyticsController ───────────────────────── -->
+        <mxCell id="c_ac" value="&lt;&lt;Control&gt;&gt;&#xa;AnalyticsController" style="swimlane;fontStyle=3;align=center;fillColor=#ffe6cc;strokeColor=#d6b656;startSize=36;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="840" y="660" width="265" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_ac_meth" value="+ computeAnalytics(userId)&#xa;+ getDashboardData(userId)&#xa;+ getRecommendations(userId)&#xa;+ evaluateGoals(userId)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_ac">
+          <mxGeometry x="0" y="36" width="265" height="84" as="geometry"/>
+        </mxCell>
+
+        <!-- ── NotificationController ────────────────────── -->
+        <mxCell id="c_nc" value="&lt;&lt;Control&gt;&gt;&#xa;NotificationController" style="swimlane;fontStyle=3;align=center;fillColor=#ffe6cc;strokeColor=#d6b656;startSize=36;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1145" y="660" width="265" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_nc_meth" value="+ dispatch(userId, type)&#xa;+ getStatus(notifId)&#xa;+ listNotifications(userId)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_nc">
+          <mxGeometry x="0" y="36" width="265" height="64" as="geometry"/>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════
+             ROW 4 — BOUNDARY CLASSES  (<<Boundary>>)
+        ════════════════════════════════════════════════════ -->
+
+        <!-- ── LoginForm ────────────────────────────────── -->
+        <mxCell id="c_lf" value="&lt;&lt;Boundary&gt;&gt;&#xa;LoginForm" style="swimlane;fontStyle=3;align=center;fillColor=#f5f5f5;strokeColor=#666666;startSize=36;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="40" y="865" width="215" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_lf_meth" value="+ submitLogin()   + showError()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_lf">
+          <mxGeometry x="0" y="36" width="215" height="44" as="geometry"/>
+        </mxCell>
+
+        <!-- ── DashboardView ────────────────────────────── -->
+        <mxCell id="c_dv" value="&lt;&lt;Boundary&gt;&gt;&#xa;DashboardView" style="swimlane;fontStyle=3;align=center;fillColor=#f5f5f5;strokeColor=#666666;startSize=36;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="310" y="865" width="230" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_dv_meth" value="+ render()   + fetchData()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_dv">
+          <mxGeometry x="0" y="36" width="230" height="44" as="geometry"/>
+        </mxCell>
+
+        <!-- ── DeviceAgentInterface ──────────────────────── -->
+        <mxCell id="c_dai" value="&lt;&lt;Boundary&gt;&gt;&#xa;DeviceAgentInterface" style="swimlane;fontStyle=3;align=center;fillColor=#f5f5f5;strokeColor=#666666;startSize=36;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="580" y="865" width="230" height="80" as="geometry"/>
+        </mxCell>
+        <mxCell id="c_dai_meth" value="+ receiveUsageData()&#xa;+ validatePayload()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=6;fontSize=11;" vertex="1" parent="c_dai">
+          <mxGeometry x="0" y="36" width="230" height="44" as="geometry"/>
+        </mxCell>
+
+        <!-- ══════════════════════════════════════════════════
+             RELATIONSHIPS
+             Notation:
+               Association  : solid line, open arrowhead
+               Composition  : filled diamond (source) + open arrow
+               Aggregation  : hollow diamond (source) + open arrow
+               Dependency   : dashed line, open arrowhead  <<use>>
+        ════════════════════════════════════════════════════ -->
+
+        <!-- ── Entity–Entity Associations ─────────────────────────── -->
+
+        <!-- User  1 ──→  *  Subscription  (direct horizontal) -->
+        <mxCell id="r1" value="1        *" style="endArrow=open;endFill=0;startArrow=none;strokeColor=#6c8ebf;fontSize=10;exitX=1;exitY=0.35;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;" edge="1" source="c_user" target="c_sub" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- User  1 ──→  *  UsageRecord  (top bus, y=30) -->
+        <mxCell id="r2" value="1        *" style="endArrow=open;endFill=0;startArrow=none;strokeColor=#9673a6;fontSize=10;exitX=0.75;exitY=0;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" edge="1" source="c_user" target="c_usage" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="231" y="30"/>
+              <mxPoint x="734" y="30"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- User  1 ──→  *  Goal  (top bus, y=15) -->
+        <mxCell id="r3" value="1        *" style="endArrow=open;endFill=0;startArrow=none;strokeColor=#d6b656;fontSize=10;exitX=0.9;exitY=0;exitDx=0;exitDy=0;entryX=0.1;entryY=0;entryDx=0;entryDy=0;" edge="1" source="c_user" target="c_goal" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="270" y="15"/>
+              <mxPoint x="1002" y="15"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- User  1 ──→  *  Notification  (bottom bus, y=325) -->
+        <mxCell id="r4" value="1        *" style="endArrow=open;endFill=0;startArrow=none;strokeColor=#b85450;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" source="c_user" target="c_notif" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="167" y="325"/>
+              <mxPoint x="630" y="325"/>
+              <mxPoint x="630" y="424"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- User  1 ──→  *  Report  (bottom bus, y=340) -->
+        <mxCell id="r5" value="1        *" style="endArrow=open;endFill=0;startArrow=none;strokeColor=#b85450;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" source="c_user" target="c_report" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="167" y="340"/>
+              <mxPoint x="940" y="340"/>
+              <mxPoint x="940" y="424"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Subscription  ◆──→  1  AnalyticsResult  (Composition, vertical) -->
+        <mxCell id="r6" value="1          1" style="startArrow=diamond;startFill=1;endArrow=open;endFill=0;strokeColor=#82b366;fontSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="c_sub" target="c_ar" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- AnalyticsResult  ◇──→  *  UsageRecord  (Aggregation) -->
+        <mxCell id="r7" value="*          *" style="startArrow=diamond;startFill=0;endArrow=open;endFill=0;strokeColor=#9673a6;fontSize=10;exitX=1;exitY=0.4;exitDx=0;exitDy=0;entryX=1;entryY=1;entryDx=0;entryDy=0;" edge="1" source="c_ar" target="c_usage" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="513"/>
+              <mxPoint x="760" y="285"/>
+              <mxPoint x="925" y="285"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Goal ──── AnalyticsResult  (Association, dashed) -->
+        <mxCell id="r8" value="" style="endArrow=open;endFill=0;startArrow=none;dashed=1;strokeColor=#d6b656;fontSize=10;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.15;entryDx=0;entryDy=0;" edge="1" source="c_goal" target="c_ar" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="975" y="345"/>
+              <mxPoint x="660" y="345"/>
+              <mxPoint x="660" y="380"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ── Controller → Entity  (Dependency  <<use>>) ──────────── -->
+
+        <!-- AuthController  ..→  User -->
+        <mxCell id="r9" value="&lt;&lt;use&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;startArrow=none;strokeColor=#d6b656;fontStyle=2;fontSize=10;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="c_auth" target="c_user" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- SubscriptionController  ..→  Subscription -->
+        <mxCell id="r10" value="&lt;&lt;use&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;startArrow=none;strokeColor=#d6b656;fontStyle=2;fontSize=10;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="c_sc" target="c_sub" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- UsageController  ..→  UsageRecord -->
+        <mxCell id="r11" value="&lt;&lt;use&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;startArrow=none;strokeColor=#d6b656;fontStyle=2;fontSize=10;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="c_uc" target="c_usage" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="695" y="630"/>
+              <mxPoint x="797" y="630"/>
+              <mxPoint x="797" y="260"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- AnalyticsController  ..→  AnalyticsResult -->
+        <mxCell id="r12" value="&lt;&lt;use&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;startArrow=none;strokeColor=#d6b656;fontStyle=2;fontSize=10;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="c_ac" target="c_ar" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="720"/>
+              <mxPoint x="483" y="720"/>
+              <mxPoint x="483" y="590"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- NotificationController  ..→  Notification -->
+        <mxCell id="r13" value="&lt;&lt;use&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;startArrow=none;strokeColor=#d6b656;fontStyle=2;fontSize=10;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="c_nc" target="c_notif" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1050" y="710"/>
+              <mxPoint x="1050" y="463"/>
+              <mxPoint x="925" y="463"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ── Boundary → Controller  (Dependency  <<use>>) ─────────── -->
+
+        <!-- LoginForm  ..→  AuthController -->
+        <mxCell id="r14" value="&lt;&lt;use&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;startArrow=none;strokeColor=#666666;fontStyle=2;fontSize=10;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="c_lf" target="c_auth" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- DashboardView  ..→  AnalyticsController -->
+        <mxCell id="r15" value="&lt;&lt;use&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;startArrow=none;strokeColor=#666666;fontStyle=2;fontSize=10;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" source="c_dv" target="c_ac" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="905"/>
+              <mxPoint x="820" y="780"/>
+              <mxPoint x="840" y="780"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- DeviceAgentInterface  ..→  UsageController -->
+        <mxCell id="r16" value="&lt;&lt;use&gt;&gt;" style="dashed=1;endArrow=open;endFill=0;startArrow=none;strokeColor=#666666;fontStyle=2;fontSize=10;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" source="c_dai" target="c_uc" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
