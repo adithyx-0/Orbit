@@ -1,9 +1,7 @@
 import { useAuth } from '../context/AuthContext.jsx'
-import { useData } from '../context/DataContext.jsx'
 
 export default function Settings() {
   const { user } = useAuth()
-  const { resetData } = useData()
 
   return (
     <div className="space-y-6 max-w-2xl">
@@ -39,17 +37,6 @@ export default function Settings() {
             <span className="badge bg-slate-100 text-slate-600">Pending</span>
           </li>
         </ul>
-      </div>
-
-      <div className="card p-6">
-        <h2 className="font-semibold text-red-700">Danger zone</h2>
-        <p className="text-sm text-slate-500 mt-1">Reset all local subscriptions, goals and usage to the seed data.</p>
-        <button
-          className="btn-danger mt-4"
-          onClick={() => { if (confirm('Reset all local data to seed?')) resetData() }}
-        >
-          Reset local data
-        </button>
       </div>
     </div>
   )

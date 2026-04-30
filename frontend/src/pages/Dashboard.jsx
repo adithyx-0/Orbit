@@ -13,7 +13,10 @@ import { buildRecommendations } from '../lib/recommendations.js'
 const PIE_COLORS = ['#3b63ff', '#10b981', '#f59e0b', '#ec4899', '#6366f1']
 
 export default function Dashboard() {
-  const { subscriptions, goals, usage } = useData()
+  const { subscriptions, goals, usage, loading, error } = useData()
+
+  if (loading) return <div className="flex items-center justify-center h-64 text-slate-500">Loading…</div>
+  if (error) return <div className="flex items-center justify-center h-64 text-red-500">{error}</div>
 
   const stats = useMemo(() => {
     const active = subscriptions.filter(s => s.status === 'active')

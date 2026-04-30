@@ -1,43 +1,103 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { seedSubscriptions, seedGoals, seedUsage } from '../lib/seed.js'
+import api from '../lib/api.js'
+import { useAuth } from './AuthContext.jsx'
 
 const DataContext = createContext(null)
-const KEY_SUBS = 'prosit.subscriptions'
-const KEY_GOALS = 'prosit.goals'
-const KEY_USAGE = 'prosit.usage'
+
+function toCamel(s) {
+  return {
+    ...s,
+    billingCycle: s.billing_cycle,
+    hoursThisMonth: parseFloat(s.hours_this_month || 0),
+    renewsOn: s.renews_on,
+  }
+}
+
+function toSnake(s) {
+  return {
+    name: s.name,
+    category: s.category,
+    cost: s.cost,
+    billing_cycle: s.billingCycle || s.billing_cycle || 'monthly',
+    status: s.status || 'active',
+    hours_this_month: s.hoursThisMonth ?? s.hours_this_month ?? 0,
+    renews_on: s.renewsOn || s.renews_on || null,
+  }
+}
 
 export function DataProvider({ children }) {
+  const { user } = useAuth()
   const [subscriptions, setSubscriptions] = useState([])
   const [goals, setGoals] = useState([])
   const [usage, setUsage] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
-    setSubscriptions(load(KEY_SUBS, seedSubscriptions))
-    setGoals(load(KEY_GOALS, seedGoals))
-    setUsage(load(KEY_USAGE, seedUsage))
-  }, [])
+    if (!user) {
+      setSubscriptions([])
+      setGoals([])
+      setUsage([])
+      return
+    }
+    setLoading(true)
+    setError(null)
+    Promise.all([
+      api.get('/subscriptions'),
+      api.get('/goals'),
+      api.get('/usage?days=14'),
+    ])
+      .then(([s, g, u]) => {
+        setSubscriptions(s.data.subscriptions.map(toCamel))
+        setGoals(g.data.goals)
+        setUsage(u.data.usage)
+      })
+      .catch(() => setError('Failed to load data. Is the backend running?'))
+      .finally(() => setLoading(false))
+  }, [user])
 
-  useEffect(() => { save(KEY_SUBS, subscriptions) }, [subscriptions])
-  useEffect(() => { save(KEY_GOALS, goals) }, [goals])
-  useEffect(() => { save(KEY_USAGE, usage) }, [usage])
+  const addSubscription = async (s) => {
+    const { data } = await api.post('/subscriptions', toSnake(s))
+    setSubscriptions(prev => [toCamel(data.subscription), ...prev])
+  }
 
-  const addSubscription = (s) => setSubscriptions(p => [{ ...s, id: 'sub_' + Date.now() }, ...p])
-  const updateSubscription = (id, patch) =>
-    setSubscriptions(p => p.map(s => s.id === id ? { ...s, ...patch } : s))
-  const deleteSubscription = (id) => setSubscriptions(p => p.filter(s => s.id !== id))
+  const updateSubscription = async (id, patch) => {
+    const current = subscriptions.find(s => s.id === id)
+    const { data } = await api.put(`/subscriptions/${id}`, toSnake({ ...current, ...patch }))
+    setSubscriptions(prev => prev.map(s => s.id === id ? toCamel(data.subscription) : s))
+  }
 
-  const addGoal = (g) => setGoals(p => [{ ...g, id: 'goal_' + Date.now(), progress: 0 }, ...p])
-  const updateGoal = (id, patch) =>
-    setGoals(p => p.map(g => g.id === id ? { ...g, ...patch } : g))
-  const deleteGoal = (id) => setGoals(p => p.filter(g => g.id !== id))
+  const deleteSubscription = async (id) => {
+    await api.delete(`/subscriptions/${id}`)
+    setSubscriptions(prev => prev.filter(s => s.id !== id))
+  }
 
-  const resetData = () => {
-    localStorage.removeItem(KEY_SUBS)
-    localStorage.removeItem(KEY_GOALS)
-    localStorage.removeItem(KEY_USAGE)
-    setSubscriptions(seedSubscriptions)
-    setGoals(seedGoals)
-    setUsage(seedUsage)
+  const addGoal = async (g) => {
+    const { data } = await api.post('/goals', {
+      title: g.title,
+      category: g.category,
+      target_hours_per_week: g.targetHoursPerWeek,
+      deadline: g.deadline || null,
+    })
+    setGoals(prev => [data.goal, ...prev])
+  }
+
+  const updateGoal = async (id, patch) => {
+    const current = goals.find(g => g.id === id)
+    const merged = { ...current, ...patch }
+    const { data } = await api.put(`/goals/${id}`, {
+      title: merged.title,
+      category: merged.category,
+      target_hours_per_week: merged.target_hours_per_week,
+      deadline: merged.deadline || null,
+      progress: merged.progress,
+    })
+    setGoals(prev => prev.map(g => g.id === id ? data.goal : g))
+  }
+
+  const deleteGoal = async (id) => {
+    await api.delete(`/goals/${id}`)
+    setGoals(prev => prev.filter(g => g.id !== id))
   }
 
   return (
@@ -45,7 +105,8 @@ export function DataProvider({ children }) {
       subscriptions, addSubscription, updateSubscription, deleteSubscription,
       goals, addGoal, updateGoal, deleteGoal,
       usage,
-      resetData,
+      loading,
+      error,
     }}>
       {children}
     </DataContext.Provider>
@@ -56,14 +117,4 @@ export function useData() {
   const ctx = useContext(DataContext)
   if (!ctx) throw new Error('useData must be used inside DataProvider')
   return ctx
-}
-
-function load(key, fallback) {
-  const raw = localStorage.getItem(key)
-  if (!raw) return fallback
-  try { return JSON.parse(raw) } catch { return fallback }
-}
-
-function save(key, value) {
-  localStorage.setItem(key, JSON.stringify(value))
 }

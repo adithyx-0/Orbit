@@ -47,8 +47,8 @@ export default function Goals() {
                   {g.deadline && <span className="text-xs text-slate-500">due {g.deadline}</span>}
                 </div>
                 <h3 className="mt-2 font-semibold">{g.title}</h3>
-                {g.targetHoursPerWeek > 0 && (
-                  <p className="text-sm text-slate-500 mt-1">Target: {g.targetHoursPerWeek} h/week</p>
+                {g.target_hours_per_week > 0 && (
+                  <p className="text-sm text-slate-500 mt-1">Target: {g.target_hours_per_week} h/week</p>
                 )}
               </div>
               <button className="btn-danger !p-2" onClick={() => { if (confirm('Delete this goal?')) deleteGoal(g.id) }}>

@@ -7,7 +7,7 @@ import { useData } from '../context/DataContext.jsx'
 import { currency, costPerHour } from '../lib/format.js'
 
 export default function Analytics() {
-  const { subscriptions, usage } = useData()
+  const { subscriptions, usage, loading, error } = useData()
 
   const cphData = useMemo(() => {
     return subscriptions
@@ -36,6 +36,9 @@ export default function Analytics() {
       total: (u.learning || 0) + (u.entertainment || 0) + (u.productivity || 0),
     }))
   }, [usage])
+
+  if (loading) return <div className="flex items-center justify-center h-64 text-slate-500">Loading…</div>
+  if (error) return <div className="flex items-center justify-center h-64 text-red-500">{error}</div>
 
   return (
     <div className="space-y-6">

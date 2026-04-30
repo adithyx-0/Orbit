@@ -6,7 +6,7 @@ import Modal from '../components/Modal.jsx'
 import { currency, hours, costPerHour, categoryColor, statusColor } from '../lib/format.js'
 
 export default function Subscriptions() {
-  const { subscriptions, addSubscription, updateSubscription, deleteSubscription } = useData()
+  const { subscriptions, addSubscription, updateSubscription, deleteSubscription, loading, error } = useData()
   const [openAdd, setOpenAdd] = useState(false)
   const [editing, setEditing] = useState(null)
   const [filter, setFilter] = useState('all')
@@ -22,6 +22,9 @@ export default function Subscriptions() {
 
   const togglePause = (s) =>
     updateSubscription(s.id, { status: s.status === 'active' ? 'paused' : 'active' })
+
+  if (loading) return <div className="flex items-center justify-center h-64 text-slate-500">Loading…</div>
+  if (error) return <div className="flex items-center justify-center h-64 text-red-500">{error}</div>
 
   return (
     <div className="space-y-6">
