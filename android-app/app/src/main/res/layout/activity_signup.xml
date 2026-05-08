@@ -11,7 +11,6 @@
         android:orientation="vertical"
         android:padding="32dp">
 
-        <!-- Logo / App name -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,11 +24,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="48dp"
-            android:text="Subscription Intelligence"
+            android:text="Create your account"
             android:textColor="#6B7396"
             android:textSize="13sp" />
 
-        <!-- Email field -->
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Full name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="#DDE1F5"
+                android:textColorHint="#6B7396" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
@@ -46,8 +60,8 @@
                 android:textColorHint="#6B7396" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Password field -->
-        <com.google.android.material.textfield.TextInputLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.google.android.material.textfield.TextInputLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,18 +78,16 @@
                 android:textColorHint="#6B7396" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Login button -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnSignup"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="#1D9E75"
-            android:text="Log In"
+            android:text="Create Account"
             android:textColor="#FFFFFF"
             android:textSize="15sp" />
 
-        <!-- Loading indicator -->
         <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
@@ -84,11 +96,11 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/tvSignup"
+            android:id="@+id/tvLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Don't have an account? Sign up"
+            android:text="Already have an account? Log in"
             android:textColor="#6B7396"
             android:textSize="13sp" />
 
