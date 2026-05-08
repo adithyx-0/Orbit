@@ -1,4 +1,4 @@
-# Orbit
+# Prosit
 
 AI-Powered Personal Resource Optimization & Subscription Intelligence System
 
@@ -8,7 +8,7 @@ AI-Powered Personal Resource Optimization & Subscription Intelligence System
 
 ## What It Does
 
-Orbit helps you track subscriptions, monitor how much you actually use each one, and tells you whether they're worth keeping — with an AI chatbot that knows your actual usage data, not just generic advice.
+Prosit helps you track subscriptions, monitor how much you actually use each one, and tells you whether they're worth keeping — with an AI chatbot that knows your actual usage data, not just generic advice.
 
 **Key features:**
 - Subscription management with cost and billing tracking
