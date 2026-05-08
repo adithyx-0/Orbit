@@ -1,0 +1,9 @@
+{
+  "_comment": "Copy this to categories.json to override or extend the built-in mappings.",
+  "_comment2": "Keys are process names (lowercase .exe), values are: learning | entertainment | productivity",
+
+  "chrome.exe": "learning",
+  "msedge.exe": "learning",
+  "my_study_app.exe": "learning",
+  "some_game.exe": "entertainment"
+}
