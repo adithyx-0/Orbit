@@ -35,3 +35,12 @@ local.properties
 # OS files
 .DS_Store
 Thumbs.db
+
+# claude
+
+.claude/
+CLAUDE.md
+
+# Miscellaneous
+Work_Division.docx
+
