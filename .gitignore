@@ -1,17 +1,37 @@
+# Node.js
 node_modules/
 dist/
+build/
+.next/
+coverage/
+*.log
+
+# Environment files
 .env
 .env.local
+.env.*
 *.local
-.DS_Store
+
+# Vite
+vite.svg
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
-.gradle/
-build/
-*.class
-local.properties
-.idea/
-*.iml
 venv/
 .venv/
+
+# Android / Gradle
+.gradle/
+local.properties
+*.class
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db

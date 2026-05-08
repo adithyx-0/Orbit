@@ -3,7 +3,19 @@
     "allow": [
       "Bash(python3 -m pip install python-docx -q)",
       "Bash(npm run:*)",
-      "Bash(npx vite:*)"
+      "Bash(npx vite:*)",
+      "Bash(cat backend/src/db/schema.sql)",
+      "Bash(cat backend/db/schema.sql)",
+      "Bash(ls backend/src/middleware/)",
+      "Bash(cat backend/src/middleware/*.js)",
+      "Bash(cat frontend/vite.config.js)",
+      "Bash(cat frontend/vite.config.ts)",
+      "Bash(cat frontend/tailwind.config.js)",
+      "Bash(cat frontend/tailwind.config.ts)",
+      "Bash(cat frontend/src/context/*.jsx)",
+      "Bash(cat frontend/src/context/*.js)",
+      "Bash(cat frontend/src/lib/*.js)",
+      "Bash(cat frontend/src/lib/*.jsx)"
     ]
   }
 }
