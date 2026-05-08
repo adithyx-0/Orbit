@@ -1,5 +1,8 @@
 import pg from 'pg'
+import dns from 'dns'
 import 'dotenv/config'
+
+dns.setDefaultResultOrder('ipv4first')
 
 const { Pool } = pg
 
