@@ -19,16 +19,6 @@ Orbit helps you track subscriptions, monitor how much you actually use each one,
 - Renewal email alerts (3 days before charge)
 - Weekly/monthly cost forecasting
 
----
-
-## Team
-
-| Name | Roll | Role |
-|------|------|------|
-| Adithyan R | AM.SC.U4AIE23065 | Backend & AI |
-| Adithya Rajesh | AM.SC.U4AIE23007 | Frontend & UI |
-
----
 
 ## Tech Stack
 
@@ -128,4 +118,4 @@ See `backend/.env.example` for required variables:
 ## Live Demo
 
 - Backend API: https://prosit-ej7i.onrender.com/health
-- Frontend: *(link here once deployed)*
+- Frontend: *(https://prosit-ej7i.onrender.com  )*
