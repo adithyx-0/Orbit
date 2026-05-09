@@ -40,6 +40,9 @@ Thumbs.db
 .claude/
 CLAUDE.md
 
-# Misc
 
+# backend
+/src/.env
+
+# Misc
 files/
