@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Usage access: user must grant manually via Settings > Apps > Special app access > Usage access -->
     <uses-permission
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
@@ -14,9 +13,11 @@
         android:theme="@style/Theme.Prosit"
         android:networkSecurityConfig="@xml/network_security_config">
 
+        <!-- Splash is the entry point -->
         <activity
-            android:name=".ui.login.LoginActivity"
-            android:exported="true">
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Prosit">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,9 +25,23 @@
         </activity>
 
         <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".ui.login.SignupActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.subscriptions.AddSubscriptionActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- Legacy activities kept for backward compat -->
         <activity
             android:name=".ui.subscriptions.SubscriptionsActivity"
             android:exported="false" />

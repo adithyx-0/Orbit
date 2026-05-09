@@ -33,6 +33,14 @@ data class Subscription(
     val hours_this_month: Double?
 )
 data class SubscriptionsResponse(val subscriptions: List<Subscription>)
+data class SubscriptionRequest(
+    val name: String,
+    val cost: Double,
+    val category: String,
+    val billing_cycle: String,
+    val hours_this_month: Double?,
+    val renews_on: String?
+)
 
 // ── Usage models ──────────────────────────────────────────────
 
@@ -88,6 +96,12 @@ interface PrositApi {
     // Subscriptions
     @GET("api/subscriptions")
     suspend fun getSubscriptions(@Header("Authorization") token: String): SubscriptionsResponse
+
+    @POST("api/subscriptions")
+    suspend fun addSubscription(
+        @Header("Authorization") token: String,
+        @Body request: SubscriptionRequest
+    ): Any
 
     // Usage
     @POST("api/usage")

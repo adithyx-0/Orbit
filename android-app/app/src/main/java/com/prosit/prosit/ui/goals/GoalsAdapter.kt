@@ -1,8 +1,10 @@
 package com.prosit.prosit.ui.goals
 
+import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -38,9 +40,14 @@ class GoalsAdapter(private val onDelete: (Goal) -> Unit) :
             }
             binding.tvCategory.setTextColor(Color.parseColor(catColor))
 
-            val target = goal.target_hours_per_week ?: 0.0
+            val target   = goal.target_hours_per_week ?: 0.0
             val progress = goal.progress.toInt().coerceIn(0, 100)
-            binding.progressBar.progress = progress
+            binding.progressBar.progress = 0
+            ObjectAnimator.ofInt(binding.progressBar, "progress", 0, progress).apply {
+                duration    = 700
+                interpolator = DecelerateInterpolator()
+                start()
+            }
 
             val progressHrs = (target * progress / 100.0)
             binding.tvProgress.text = if (target > 0)

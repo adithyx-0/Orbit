@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.prosit.prosit.api.ApiClient
 import com.prosit.prosit.api.RegisterRequest
 import com.prosit.prosit.databinding.ActivitySignupBinding
-import com.prosit.prosit.ui.subscriptions.SubscriptionsActivity
+import com.prosit.prosit.ui.main.MainActivity
 import kotlinx.coroutines.launch
 
 class SignupActivity : AppCompatActivity() {
@@ -51,7 +51,7 @@ class SignupActivity : AppCompatActivity() {
                     .putString("user_name", response.user.name)
                     .apply()
 
-                startActivity(Intent(this@SignupActivity, SubscriptionsActivity::class.java))
+                startActivity(Intent(this@SignupActivity, MainActivity::class.java))
                 finish()
 
             } catch (e: Exception) {

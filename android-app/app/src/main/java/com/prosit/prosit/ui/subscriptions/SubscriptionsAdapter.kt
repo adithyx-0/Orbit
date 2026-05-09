@@ -34,7 +34,13 @@ class SubscriptionsAdapter :
             binding.tvCost.text     = "₹%.0f/mo".format(sub.cost)
             binding.tvStatus.text   = sub.status.replaceFirstChar { it.uppercase() }
 
-            // Color-code status pill
+            val hours = sub.hours_this_month ?: 0.0
+            binding.tvHours.text = if (hours > 0) "%.0f h".format(hours) else "0 h"
+            binding.tvCostPerHour.text = if (hours > 0)
+                "₹%.0f/hr".format(sub.cost / hours)
+            else
+                "—/hr"
+
             when (sub.status) {
                 "active" -> {
                     binding.tvStatus.setBackgroundColor(Color.parseColor("#1A3D30"))
@@ -50,7 +56,6 @@ class SubscriptionsAdapter :
                 }
             }
 
-            // Color-code category dot
             val dotColor = when (sub.category) {
                 "ai_tools"      -> "#1D9E75"
                 "entertainment" -> "#D4537E"

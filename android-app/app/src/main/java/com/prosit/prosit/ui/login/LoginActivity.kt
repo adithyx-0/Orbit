@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.prosit.prosit.api.ApiClient
 import com.prosit.prosit.api.LoginRequest
 import com.prosit.prosit.databinding.ActivityLoginBinding
-import com.prosit.prosit.ui.subscriptions.SubscriptionsActivity
+import com.prosit.prosit.ui.main.MainActivity
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -22,9 +22,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // If already logged in, skip straight to subscriptions
         if (getSavedToken() != null) {
-            goToSubscriptions()
+            goToMain()
             return
         }
 
@@ -53,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
                 saveToken(response.token)
                 saveUserName(response.user.name)
 
-                goToSubscriptions()
+                goToMain()
 
             } catch (e: Exception) {
                 setLoading(false)
@@ -73,8 +72,8 @@ class LoginActivity : AppCompatActivity() {
         binding.etPassword.isEnabled    = !loading
     }
 
-    private fun goToSubscriptions() {
-        startActivity(Intent(this, SubscriptionsActivity::class.java))
+    private fun goToMain() {
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 

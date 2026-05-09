@@ -2,4 +2,29 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="color_bg">#0D0F1A</color>
+    <color name="color_surface">#161926</color>
+    <color name="color_surface_variant">#1E2130</color>
+    <color name="color_divider">#2A2D3E</color>
+
+    <color name="color_brand">#1D9E75</color>
+    <color name="color_brand_dim">#1A3D30</color>
+    <color name="color_brand_text">#1D9E75</color>
+
+    <color name="color_text_primary">#DDE1F5</color>
+    <color name="color_text_secondary">#6B7396</color>
+    <color name="color_text_hint">#454B66</color>
+
+    <color name="color_blue">#378ADD</color>
+    <color name="color_blue_dim">#1A2A3E</color>
+    <color name="color_amber">#E8A838</color>
+    <color name="color_amber_dim">#2E2210</color>
+    <color name="color_red">#E24B4A</color>
+    <color name="color_red_dim">#3D1A1A</color>
+    <color name="color_pink">#D4537E</color>
+    <color name="color_green">#1D9E75</color>
+
+    <color name="color_shimmer_base">#1A1D2E</color>
+    <color name="color_shimmer_highlight">#252840</color>
 </resources>

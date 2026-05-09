@@ -45,6 +45,13 @@ dependencies {
     // WorkManager — background usage uploads
     implementation("androidx.work:work-runtime-ktx:2.9.0")
 
+    // Shimmer loading effect
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+    // Pull-to-refresh
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    // Fragment KTX
+    implementation("androidx.fragment:fragment-ktx:1.7.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
