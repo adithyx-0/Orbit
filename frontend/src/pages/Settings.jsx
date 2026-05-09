@@ -30,11 +30,11 @@ export default function Settings() {
         <ul className="mt-4 space-y-3 text-sm">
           <li className="flex items-center justify-between">
             <span><strong>Android companion</strong> — Kotlin · not connected</span>
-            <span className="badge bg-slate-100 text-slate-600">Pending</span>
+            <span className="badge-neutral">Pending</span>
           </li>
           <li className="flex items-center justify-between">
             <span><strong>Windows desktop agent</strong> — Python · not connected</span>
-            <span className="badge bg-slate-100 text-slate-600">Pending</span>
+            <span className="badge-neutral">Pending</span>
           </li>
         </ul>
       </div>

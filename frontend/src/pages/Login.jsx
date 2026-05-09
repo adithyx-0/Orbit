@@ -46,7 +46,7 @@ export default function Login() {
           <h2 className="text-2xl font-bold">Sign in</h2>
           <p className="text-sm text-slate-500 mt-1">Welcome back. Enter your details below.</p>
 
-          {error && <div className="mt-4 p-3 rounded-lg bg-red-50 text-red-700 text-sm">{error}</div>}
+          {error && <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">{error}</div>}
 
           <div className="mt-6 space-y-4">
             <div>
@@ -67,9 +67,6 @@ export default function Login() {
             No account? <Link className="text-brand-600 font-medium" to="/signup">Create one</Link>
           </p>
 
-          <p className="text-[11px] text-slate-400 mt-6 text-center">
-            Demo mode — any email/password works until the backend is live.
-          </p>
         </form>
       </div>
     </div>

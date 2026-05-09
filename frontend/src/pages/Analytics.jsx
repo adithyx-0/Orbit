@@ -52,7 +52,7 @@ export default function Analytics() {
         <div className="h-72">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={cphData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
               <XAxis dataKey="name" tick={{ fontSize: 11 }} />
               <YAxis tick={{ fontSize: 11 }} tickFormatter={v => '₹' + v} />
               <Tooltip formatter={(v) => currency(v)} />
@@ -68,7 +68,7 @@ export default function Analytics() {
           <div className="h-60">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={roiData} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
                 <XAxis type="number" domain={[0, 100]} tick={{ fontSize: 11 }} tickFormatter={v => v + '%'} />
                 <YAxis type="category" dataKey="name" tick={{ fontSize: 11 }} width={110} />
                 <Tooltip formatter={(v) => v + '%'} />
@@ -83,7 +83,7 @@ export default function Analytics() {
           <div className="h-60">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={totals}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
                 <XAxis dataKey="date" tick={{ fontSize: 11 }} />
                 <YAxis tick={{ fontSize: 11 }} />
                 <Tooltip />
@@ -98,22 +98,22 @@ export default function Analytics() {
       <div className="card p-6">
         <h2 className="font-semibold mb-4">Breakdown table</h2>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="text-xs uppercase tracking-wide text-slate-500">
-              <tr className="border-b border-slate-100">
-                <th className="text-left py-2">Service</th>
-                <th className="text-right py-2">Monthly cost</th>
-                <th className="text-right py-2">Hours</th>
-                <th className="text-right py-2">Cost / hour</th>
+          <table className="table-base">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th className="text-right">Monthly cost</th>
+                <th className="text-right">Hours</th>
+                <th className="text-right">Cost / hour</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-100">
+            <tbody>
               {cphData.map(r => (
                 <tr key={r.name}>
-                  <td className="py-2 font-medium">{r.name}</td>
-                  <td className="py-2 text-right">{currency(r.cost)}</td>
-                  <td className="py-2 text-right">{r.hours} h</td>
-                  <td className="py-2 text-right">{r.costPerHour ? currency(r.costPerHour) : '—'}</td>
+                  <td className="font-medium text-white">{r.name}</td>
+                  <td className="text-right">{currency(r.cost)}</td>
+                  <td className="text-right">{r.hours} h</td>
+                  <td className="text-right">{r.costPerHour ? currency(r.costPerHour) : '—'}</td>
                 </tr>
               ))}
             </tbody>

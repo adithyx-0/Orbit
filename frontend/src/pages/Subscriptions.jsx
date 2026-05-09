@@ -51,7 +51,9 @@ export default function Subscriptions() {
               key={c}
               onClick={() => setFilter(c)}
               className={`badge px-3 py-1 border transition ${
-                filter === c ? 'bg-brand-600 text-white border-brand-600' : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
+                filter === c
+                  ? 'bg-brand-600 text-white border-brand-600'
+                  : 'bg-white/6 text-slate-400 border-white/8 hover:bg-white/10 hover:text-white'
               }`}
             >
               {c === 'all' ? 'All' : c}
@@ -61,34 +63,34 @@ export default function Subscriptions() {
       </div>
 
       <div className="card overflow-hidden">
-        <table className="w-full text-sm">
-          <thead className="bg-slate-50 text-slate-600 text-xs uppercase tracking-wide">
+        <table className="table-base">
+          <thead>
             <tr>
-              <th className="text-left px-4 py-3">Service</th>
-              <th className="text-left px-4 py-3">Category</th>
-              <th className="text-right px-4 py-3">Cost</th>
-              <th className="text-right px-4 py-3">Hours / mo</th>
-              <th className="text-right px-4 py-3">₹ / hour</th>
-              <th className="text-left px-4 py-3">Renews</th>
-              <th className="text-left px-4 py-3">Status</th>
-              <th className="text-right px-4 py-3">Actions</th>
+              <th>Service</th>
+              <th>Category</th>
+              <th className="text-right">Cost</th>
+              <th className="text-right">Hours / mo</th>
+              <th className="text-right">₹ / hour</th>
+              <th>Renews</th>
+              <th>Status</th>
+              <th className="text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100">
+          <tbody>
             {filtered.length === 0 && (
-              <tr><td colSpan={8} className="py-12 text-center text-slate-400">No subscriptions match.</td></tr>
+              <tr><td colSpan={8} className="py-12 text-center text-slate-500">No subscriptions match.</td></tr>
             )}
             {filtered.map(s => {
               const cph = costPerHour(s.cost, s.hoursThisMonth)
               return (
-                <tr key={s.id} className="hover:bg-slate-50/60">
-                  <td className="px-4 py-3 font-medium">{s.name}</td>
-                  <td className="px-4 py-3"><span className={`badge ${categoryColor(s.category)}`}>{s.category}</span></td>
-                  <td className="px-4 py-3 text-right">{currency(s.cost)}<span className="text-xs text-slate-400">/{s.billingCycle.slice(0,2)}</span></td>
-                  <td className="px-4 py-3 text-right">{hours(s.hoursThisMonth)}</td>
-                  <td className="px-4 py-3 text-right">{cph ? currency(cph) : <span className="text-slate-400">—</span>}</td>
-                  <td className="px-4 py-3 text-slate-600">{s.renewsOn || '—'}</td>
-                  <td className="px-4 py-3"><span className={`badge ${statusColor(s.status)}`}>{s.status}</span></td>
+                <tr key={s.id}>
+                  <td className="font-medium text-white">{s.name}</td>
+                  <td><span className={`badge ${categoryColor(s.category)}`}>{s.category}</span></td>
+                  <td className="text-right">{currency(s.cost)}<span className="text-xs text-slate-500">/{s.billingCycle.slice(0,2)}</span></td>
+                  <td className="text-right">{hours(s.hoursThisMonth)}</td>
+                  <td className="text-right">{cph ? currency(cph) : <span className="text-slate-500">—</span>}</td>
+                  <td className="text-slate-400">{s.renewsOn || '—'}</td>
+                  <td><span className={`badge ${statusColor(s.status)}`}>{s.status}</span></td>
                   <td className="px-4 py-3">
                     <div className="flex justify-end gap-1">
                       <button className="btn-secondary !p-2" title={s.status === 'active' ? 'Pause' : 'Resume'} onClick={() => togglePause(s)}>

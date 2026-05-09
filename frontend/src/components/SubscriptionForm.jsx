@@ -31,7 +31,7 @@ export default function SubscriptionForm({ initial, onSubmit, onCancel }) {
 
   return (
     <form onSubmit={submit} className="space-y-4">
-      {error && <div className="p-3 rounded-lg bg-red-50 text-red-700 text-sm">{error}</div>}
+      {error && <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">{error}</div>}
 
       <div>
         <label className="label">Service name</label>

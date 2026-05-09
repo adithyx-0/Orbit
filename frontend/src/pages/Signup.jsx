@@ -25,12 +25,12 @@ export default function Signup() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-slate-50">
+    <div className="min-h-screen flex items-center justify-center p-6">
       <form onSubmit={submit} className="w-full max-w-sm card p-8">
         <h2 className="text-2xl font-bold">Create account</h2>
         <p className="text-sm text-slate-500 mt-1">Start tracking your subscriptions in 30 seconds.</p>
 
-        {error && <div className="mt-4 p-3 rounded-lg bg-red-50 text-red-700 text-sm">{error}</div>}
+        {error && <div className="mt-4 p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">{error}</div>}
 
         <div className="mt-6 space-y-4">
           <div>
