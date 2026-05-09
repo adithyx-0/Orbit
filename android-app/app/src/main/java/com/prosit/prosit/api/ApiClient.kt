@@ -124,7 +124,7 @@ object ApiClient {
     // 10.0.2.2 = PC localhost from Android emulator.
     // Change to your Render URL when testing on a physical device:
     // e.g. "https://prosit-backend.onrender.com/"
-    private const val BASE_URL = "http://10.0.2.2:5000/"
+    private const val BASE_URL = "https://prosit-api.onrender.com/"
 
     val api: PrositApi by lazy {
         Retrofit.Builder()

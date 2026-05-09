@@ -13,6 +13,14 @@ function toCamel(s) {
   }
 }
 
+function toGoal(g) {
+  return {
+    ...g,
+    progress: parseFloat(g.progress ?? 0),
+    target_hours_per_week: parseFloat(g.target_hours_per_week ?? 0),
+  }
+}
+
 function toSnake(s) {
   return {
     name: s.name,
@@ -49,7 +57,7 @@ export function DataProvider({ children }) {
     ])
       .then(([s, g, u]) => {
         setSubscriptions(s.data.subscriptions.map(toCamel))
-        setGoals(g.data.goals)
+        setGoals(g.data.goals.map(toGoal))
         setUsage(u.data.usage)
       })
       .catch(() => setError('Failed to load data. Is the backend running?'))
@@ -79,7 +87,7 @@ export function DataProvider({ children }) {
       target_hours_per_week: g.targetHoursPerWeek,
       deadline: g.deadline || null,
     })
-    setGoals(prev => [data.goal, ...prev])
+    setGoals(prev => [toGoal(data.goal), ...prev])
   }
 
   const updateGoal = async (id, patch) => {
@@ -92,7 +100,7 @@ export function DataProvider({ children }) {
       deadline: merged.deadline || null,
       progress: merged.progress,
     })
-    setGoals(prev => prev.map(g => g.id === id ? data.goal : g))
+    setGoals(prev => prev.map(g => g.id === id ? toGoal(data.goal) : g))
   }
 
   const deleteGoal = async (id) => {
