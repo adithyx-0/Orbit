@@ -330,3 +330,16 @@ html.light header [class*="hover:bg-white"]:hover { background-color: rgba(0,0,0
 html.light header [class*="hover:text-white"]:hover { color: #0f172a !important; }
 html.light header [class*="border-white"] { border-color: rgba(0,0,0,0.08) !important; }
 html.light header [class*="ring-surface"] { --tw-ring-offset-color: #ffffff; }
+
+/* Global text overrides — white/near-white → dark in light mode */
+html.light .text-white    { color: #0f172a !important; }
+html.light .text-slate-100 { color: #1e293b !important; }
+html.light .text-slate-200 { color: #334155 !important; }
+html.light .text-slate-300 { color: #475569 !important; }
+
+/* Restore white text on colored/brand backgrounds */
+html.light .btn-primary,
+html.light .btn-primary * { color: #ffffff !important; }
+html.light [class*="bg-brand-6"] .text-white,
+html.light [class*="bg-emerald-5"] .text-white,
+html.light [class*="bg-red-5"] .text-white { color: #ffffff !important; }
