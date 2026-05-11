@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
         ).join('\n')
       : '  (none set)'
 
-    const systemPrompt = `You are Orbit AI, an intelligent personal subscription & resource optimization assistant built into the Orbit app.
+    const systemPrompt = `You are Prosit AI, an intelligent personal subscription & resource optimization assistant built into the Prosit app.
 
 You have real-time access to this user's data:
 
