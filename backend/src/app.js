@@ -12,22 +12,7 @@ import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
 
-app.use(cors({
-  origin: (origin, callback) => {
-    // Allow: no origin (curl/mobile), localhost dev, any *.onrender.com deploy, or explicit FRONTEND_URL
-    if (
-      !origin ||
-      origin.startsWith('http://localhost') ||
-      origin.endsWith('.onrender.com') ||
-      origin === process.env.FRONTEND_URL
-    ) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
-  credentials: true,
-}))
+app.use(cors())
 app.use(express.json())
 
 app.use('/api/auth', authRoutes)
