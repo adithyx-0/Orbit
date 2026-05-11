@@ -1,12 +1,15 @@
 import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { DesktopSidebar, MobileSidebar } from './Sidebar.jsx'
 import Topbar from './Topbar.jsx'
+import ChatWidget from './ChatWidget.jsx'
+import ErrorBoundary from './ErrorBoundary.jsx'
 import { pageTransition } from '../lib/motion.js'
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const location = useLocation()
 
   return (
     <div className="min-h-screen flex bg-surface-0">
@@ -24,16 +27,20 @@ export default function Layout() {
         <Topbar onMenuClick={() => setSidebarOpen(true)} />
 
         <main className="flex-1 p-5 md:p-8 overflow-auto">
-          <motion.div
-            className="mx-auto max-w-7xl"
-            variants={pageTransition}
-            initial="hidden"
-            animate="visible"
-          >
-            <Outlet />
-          </motion.div>
+          <ErrorBoundary key={location.pathname}>
+            <motion.div
+              key={location.pathname}
+              className="mx-auto max-w-7xl"
+              variants={pageTransition}
+              initial="hidden"
+              animate="visible"
+            >
+              <Outlet />
+            </motion.div>
+          </ErrorBoundary>
         </main>
       </div>
+      <ChatWidget />
     </div>
   )
 }

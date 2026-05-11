@@ -6,6 +6,7 @@ import subscriptionRoutes from './routes/subscriptions.js'
 import goalRoutes from './routes/goals.js'
 import usageRoutes from './routes/usage.js'
 import analyticsRoutes from './routes/analytics.js'
+import chatRoutes from './routes/chat.js'
 import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
@@ -24,6 +25,7 @@ app.use('/api/subscriptions', subscriptionRoutes)
 app.use('/api/goals', goalRoutes)
 app.use('/api/usage', usageRoutes)
 app.use('/api/analytics', analyticsRoutes)
+app.use('/api/chat', chatRoutes)
 
 app.get('/health', (_, res) => res.json({ status: 'ok' }))
 
