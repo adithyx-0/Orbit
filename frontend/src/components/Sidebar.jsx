@@ -2,10 +2,11 @@ import { NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   LayoutDashboard, CreditCard, BarChart3, Target,
-  Settings as SettingsIcon, X, Zap,
+  Settings as SettingsIcon, X,
 } from 'lucide-react'
 import { cn } from '../lib/cn.js'
 import { sidebarSlide } from '../lib/motion.js'
+import PrositLogo from './PrositLogo.jsx'
 
 const NAV_LINKS = [
   { to: '/dashboard',     label: 'Dashboard',     Icon: LayoutDashboard },
@@ -19,9 +20,7 @@ const NAV_LINKS = [
 function Logo() {
   return (
     <div className="flex items-center gap-3">
-      <div className="w-8 h-8 rounded-lg bg-gradient-brand flex items-center justify-center shadow-glow-sm shrink-0">
-        <Zap size={15} className="text-white" />
-      </div>
+      <PrositLogo size={32} className="shrink-0" />
       <div>
         <div className="text-sm font-bold text-white tracking-wide leading-tight">PROSIT</div>
         <div className="text-[10px] text-slate-500 leading-tight">Subscription Intelligence</div>

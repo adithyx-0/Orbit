@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ArrowLeft, Check, BarChart2, Bell, Target, Sparkles, Zap } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Check, BarChart2, Bell, Target, Sparkles } from 'lucide-react'
+import PrositLogo from '../components/PrositLogo.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 
 // ── Onboarding data ───────────────────────────────────────────────────────────
@@ -54,9 +55,7 @@ function Landing({ onStart }) {
       >
         {/* Logo */}
         <div className="flex items-center justify-center gap-2.5 mb-12">
-          <div className="w-11 h-11 rounded-xl bg-brand-600 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-brand-900/40">
-            P
-          </div>
+          <PrositLogo size={44} />
           <span className="text-2xl font-bold tracking-tight">Prosit</span>
         </div>
 
