@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback } from 'react'
 import {
   CheckCircle2, Bell, BellOff, Smartphone, Monitor, Copy, Check,
-  ChevronDown, ChevronUp, RefreshCw, Trash2, Database,
+  ChevronDown, ChevronUp, RefreshCw, Trash2, Database, Download,
+  Wifi, BarChart2, Target, Shield,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useData } from '../context/DataContext.jsx'
@@ -350,6 +351,112 @@ function AgentsCard() {
   )
 }
 
+// ── Android App card ───────────────────────────────────────────
+
+const APK_URL     = 'https://github.com/adithyx-0/Orbit/releases/latest/download/orbit-release.apk'
+const RELEASE_URL = 'https://github.com/adithyx-0/Orbit/releases/latest'
+
+const APP_FEATURES = [
+  { icon: Wifi,      text: 'Auto-tracks app usage in the background via Android UsageStats' },
+  { icon: BarChart2, text: 'Syncs hours to your Analytics dashboard every hour' },
+  { icon: Target,    text: 'View and update your Goals on the go' },
+  { icon: Smartphone,text: 'Manage Subscriptions, log usage, and chat with Orbit AI' },
+]
+
+const INSTALL_STEPS = [
+  { n: '1', title: 'Download the APK', body: 'Tap the button above to download orbit-release.apk to your Android device.' },
+  { n: '2', title: 'Allow unknown sources', body: 'Go to Settings → Security (or Apps) → Install unknown apps, and allow your browser or Files app.' },
+  { n: '3', title: 'Open and install', body: 'Open the downloaded APK from your notifications or Files app and tap Install.' },
+  { n: '4', title: 'Grant Usage access', body: 'On first launch, tap "Grant permission" → find Orbit in the list → enable Usage access.' },
+  { n: '5', title: 'Log in', body: 'Use the same email and password as your web account — your data syncs instantly.' },
+]
+
+function AndroidAppCard() {
+  const [showSteps, setShowSteps] = useState(false)
+
+  return (
+    <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/[0.04] overflow-hidden">
+      {/* Header */}
+      <div className="flex items-center gap-4 px-5 py-5">
+        {/* App icon */}
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#1D9E75] to-[#0A5C43] flex items-center justify-center shrink-0 shadow-lg">
+          <span className="text-white text-2xl font-black leading-none select-none">P</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-base font-bold text-white">Orbit Android App</p>
+          <p className="text-xs text-slate-400 mt-0.5">
+            Auto-tracks your app usage and syncs to the dashboard
+          </p>
+          <div className="flex items-center gap-2 mt-2">
+            <span className="badge bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 text-xs">Free</span>
+            <span className="badge bg-white/6 text-slate-400 border border-white/8 text-xs">Android 6.0+</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Features grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 px-5 pb-4">
+        {APP_FEATURES.map(({ icon: Icon, text }) => (
+          <div key={text} className="flex items-start gap-2.5 text-xs text-slate-400">
+            <Icon size={13} className="text-emerald-400 shrink-0 mt-0.5" />
+            {text}
+          </div>
+        ))}
+      </div>
+
+      {/* Action buttons */}
+      <div className="flex flex-wrap items-center gap-2 px-5 pb-5">
+        <a
+          href={APK_URL}
+          download
+          className="btn-primary gap-2 text-sm"
+        >
+          <Download size={14} /> Download APK
+        </a>
+        <a
+          href={RELEASE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-secondary text-sm"
+        >
+          View releases on GitHub
+        </a>
+        <button
+          onClick={() => setShowSteps(v => !v)}
+          className="btn-ghost text-sm gap-1 text-slate-400"
+        >
+          {showSteps ? <><ChevronUp size={13}/> Hide steps</> : <><ChevronDown size={13}/> Install guide</>}
+        </button>
+      </div>
+
+      {/* Step-by-step install guide */}
+      {showSteps && (
+        <div className="border-t border-white/6 px-5 py-5 space-y-3">
+          <p className="text-xs font-semibold text-white uppercase tracking-wide mb-4">
+            How to install (sideload)
+          </p>
+          {INSTALL_STEPS.map(step => (
+            <div key={step.n} className="flex gap-3">
+              <div className="w-5 h-5 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center shrink-0 mt-0.5">
+                <span className="text-[10px] font-bold text-emerald-400">{step.n}</span>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-white">{step.title}</p>
+                <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">{step.body}</p>
+              </div>
+            </div>
+          ))}
+          <div className="mt-4 flex items-start gap-2 text-xs text-slate-500 bg-white/4 rounded-lg px-3 py-2.5">
+            <Shield size={12} className="text-slate-400 shrink-0 mt-0.5" />
+            The APK is built directly from this project's source code.
+            You can verify it at github.com/adithyx-0/Orbit before installing.
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── Page ───────────────────────────────────────────────────────
 
 export default function Settings() {
@@ -431,6 +538,9 @@ export default function Settings() {
 
       {/* Device agents */}
       <AgentsCard />
+
+      {/* Android app download */}
+      <AndroidAppCard />
 
       {/* Log usage manually */}
       <div className="card p-6">
