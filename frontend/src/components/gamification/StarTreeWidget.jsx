@@ -1,31 +1,22 @@
-import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { Star, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { motion } from 'framer-motion'
 import TreeSvg from './TreeSvg.jsx'
 import LevelBadge from './LevelBadge.jsx'
 import { useData } from '../../context/DataContext.jsx'
-import {
-  computeScore, getStarCount, MAX_STARS,
-} from '../../lib/gamification.js'
+import { MAX_STARS } from '../../lib/gamification.js'
 import { fadeInUp, staggerContainer, staggerItem } from '../../lib/motion.js'
 
-/**
- * Dashboard card showing the Star Tree, level badge, and score stats.
- * Self-contained: reads from DataContext internally.
- */
 export default function StarTreeWidget() {
-  const { subscriptions, goals } = useData()
+  const { gamification, goals } = useData()
+  const { score, starCount } = gamification
 
-  const score      = useMemo(() => computeScore(subscriptions, goals), [subscriptions, goals])
-  const starCount  = useMemo(() => getStarCount(goals), [goals])
   const completed  = goals.filter(g => g.progress >= 100).length
   const inProgress = goals.filter(g => g.progress > 0 && g.progress < 100).length
   const totalGoals = goals.length
 
   return (
     <div className="card p-6 flex flex-col gap-5">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-amber-400/15 border border-amber-400/25 flex items-center justify-center">
@@ -33,32 +24,20 @@ export default function StarTreeWidget() {
           </div>
           <h2 className="section-title">Star Tree</h2>
         </div>
-        <Link
-          to="/goals"
-          className="flex items-center gap-1 text-xs text-brand-400 hover:text-brand-300 transition-colors"
-        >
+        <Link to="/goals" className="flex items-center gap-1 text-xs text-brand-400 hover:text-brand-300 transition-colors">
           View goals <ArrowRight size={12} />
         </Link>
       </div>
 
-      {/* Body: tree + info side-by-side */}
       <div className="flex gap-5 items-center">
-        {/* Tree SVG — fixed aspect container */}
         <div className="w-36 shrink-0 aspect-square">
           <TreeSvg filledCount={starCount} />
         </div>
 
-        {/* Info panel */}
         <div className="flex-1 min-w-0 space-y-4">
           <LevelBadge score={score} compact />
 
-          {/* Quick stats */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="space-y-2"
-          >
+          <motion.div variants={staggerContainer} initial="hidden" animate="visible" className="space-y-2">
             <Stat
               label="Stars earned"
               value={`${starCount} / ${Math.max(totalGoals, MAX_STARS)}`}
@@ -74,14 +53,8 @@ export default function StarTreeWidget() {
         </div>
       </div>
 
-      {/* Empty-state CTA */}
       {totalGoals === 0 && (
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          className="text-center py-2"
-        >
+        <motion.div variants={fadeInUp} initial="hidden" animate="visible" className="text-center py-2">
           <p className="text-xs text-slate-500">
             Complete goals to grow your tree.{' '}
             <Link to="/goals" className="text-brand-400 hover:underline">Start now →</Link>

@@ -42,3 +42,12 @@ CREATE TABLE IF NOT EXISTS usage_logs (
   source     TEXT DEFAULT 'manual',
   created_at TIMESTAMPTZ DEFAULT now()
 );
+
+CREATE TABLE IF NOT EXISTS user_streaks (
+  id                SERIAL PRIMARY KEY,
+  user_id           INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  current_streak    INTEGER NOT NULL DEFAULT 1,
+  longest_streak    INTEGER NOT NULL DEFAULT 1,
+  last_active_date  DATE NOT NULL,
+  UNIQUE(user_id)
+);

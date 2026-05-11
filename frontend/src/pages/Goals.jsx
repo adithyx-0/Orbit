@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useMemo } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Plus, Trash2, CheckCircle2, ChevronUp, ChevronDown } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Modal from '../components/Modal.jsx'
@@ -7,9 +7,6 @@ import TreeSvg from '../components/gamification/TreeSvg.jsx'
 import LevelBadge from '../components/gamification/LevelBadge.jsx'
 import { useData } from '../context/DataContext.jsx'
 import { categoryVariant } from '../lib/format.js'
-import {
-  computeScore, getStarCount,
-} from '../lib/gamification.js'
 import { cn } from '../lib/cn.js'
 import { fadeInUp, staggerContainer, staggerItem } from '../lib/motion.js'
 
@@ -133,9 +130,9 @@ function GoalCard({ goal, onUpdate, onDelete, celebrating }) {
 }
 
 // ── Side panel: tree + level ──────────────────────────────────
-function TreePanel({ goals, subscriptions }) {
-  const score     = useMemo(() => computeScore(subscriptions, goals), [subscriptions, goals])
-  const starCount = useMemo(() => getStarCount(goals), [goals])
+function TreePanel({ goals }) {
+  const { gamification } = useData()
+  const { score, starCount } = gamification
   const completed = goals.filter(g => g.progress >= 100).length
   const total     = goals.length
 
@@ -199,7 +196,7 @@ function Stat({ value, label }) {
 
 // ── Page ──────────────────────────────────────────────────────
 export default function Goals() {
-  const { subscriptions, goals, addGoal, updateGoal, deleteGoal } = useData()
+  const { goals, addGoal, updateGoal, deleteGoal } = useData()
   const [open, setOpen] = useState(false)
   const [form, setForm] = useState(EMPTY_FORM)
 
@@ -291,7 +288,7 @@ export default function Goals() {
         </div>
 
         {/* Tree panel */}
-        <TreePanel goals={goals} subscriptions={subscriptions} />
+        <TreePanel goals={goals} />
       </div>
 
       {/* Add goal modal */}
