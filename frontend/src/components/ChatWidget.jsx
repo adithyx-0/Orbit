@@ -28,10 +28,11 @@ export default function ChatWidget() {
     try {
       const { data } = await api.post('/chat', { message: text })
       setMessages(prev => [...prev, { role: 'bot', text: data.reply }])
-    } catch {
+    } catch (err) {
+      const detail = err.response?.data?.reply || err.response?.data?.error || err.message || 'Unknown error'
       setMessages(prev => [...prev, {
         role: 'bot',
-        text: "Something went wrong. Make sure the backend is running.",
+        text: `Something went wrong: ${detail}`,
       }])
     } finally {
       setLoading(false)

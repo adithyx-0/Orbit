@@ -8,7 +8,7 @@ router.use(requireAuth)
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 
-router.post('/', async (req, res, next) => {
+router.post('/', async (req, res) => {
   try {
     const uid = req.user.id
     const { message } = req.body
@@ -62,16 +62,24 @@ Rules:
 - If hours are 0 across the board, gently remind the user to log usage
 - Suggest cancellations or tier downgrades when ROI is poor`
 
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
-    const result = await model.generateContent([systemPrompt, `User: ${message.trim()}`])
+    const modelName = process.env.GEMINI_MODEL || 'gemini-2.0-flash'
+    const model = genAI.getGenerativeModel({
+      model: modelName,
+      systemInstruction: systemPrompt,
+    })
+    const result = await model.generateContent(message.trim())
     const reply  = result.response.text()
 
     res.json({ reply })
   } catch (err) {
-    if (err.message?.includes('API_KEY') || err.message?.includes('API key')) {
-      return res.json({ reply: "AI service misconfigured — check GEMINI_API_KEY in the backend .env file." })
+    const msg = err.message || ''
+    if (msg.includes('API_KEY') || msg.includes('API key')) {
+      return res.json({ reply: "AI service misconfigured — GEMINI_API_KEY is missing or invalid." })
     }
-    next(err)
+    if (msg.includes('not found') || msg.includes('404') || msg.includes('model')) {
+      return res.json({ reply: `AI model error: ${msg}. Try setting GEMINI_MODEL env var.` })
+    }
+    return res.json({ reply: `AI error: ${msg || 'Unknown error from Gemini.'}` })
   }
 })
 

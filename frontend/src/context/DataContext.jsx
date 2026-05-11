@@ -33,6 +33,7 @@ function toCamel(s) {
     billingCycle:    s.billing_cycle,
     hoursThisMonth:  parseFloat(s.hours_this_month || 0),
     renewsOn:        toDateStr(s.renews_on),
+    paymentMethod:   s.payment_method || null,
   }
 }
 
@@ -54,6 +55,7 @@ function toSnake(s) {
     status:           s.status || 'active',
     hours_this_month: s.hoursThisMonth ?? s.hours_this_month ?? 0,
     renews_on:        s.renewsOn || s.renews_on || null,
+    payment_method:   s.paymentMethod || s.payment_method || null,
   }
 }
 

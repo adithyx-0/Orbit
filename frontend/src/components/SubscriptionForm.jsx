@@ -1,17 +1,19 @@
 import { useState } from 'react'
 
-const CATEGORIES = ['Entertainment', 'Learning', 'Productivity', 'Other']
-const CYCLES = ['monthly', 'quarterly', 'yearly']
+const CATEGORIES = ['Entertainment', 'Learning', 'Productivity', 'AI Tools', 'Health', 'Utilities', 'Other']
+const CYCLES     = ['monthly', 'quarterly', 'yearly']
+const PAYMENTS   = ['UPI', 'Credit Card', 'Debit Card', 'Net Banking', 'Wallet', 'Invoice', 'Cash']
 
 export default function SubscriptionForm({ initial, onSubmit, onCancel }) {
   const [form, setForm] = useState(initial || {
-    name: '',
-    category: 'Entertainment',
-    cost: '',
-    billingCycle: 'monthly',
-    renewsOn: '',
-    status: 'active',
+    name:           '',
+    category:       'Entertainment',
+    cost:           '',
+    billingCycle:   'monthly',
+    renewsOn:       '',
+    status:         'active',
     hoursThisMonth: 0,
+    paymentMethod:  '',
   })
   const [error, setError] = useState('')
 
@@ -24,14 +26,17 @@ export default function SubscriptionForm({ initial, onSubmit, onCancel }) {
     setError('')
     onSubmit({
       ...form,
-      cost: Number(form.cost),
+      cost:           Number(form.cost),
       hoursThisMonth: Number(form.hoursThisMonth) || 0,
+      paymentMethod:  form.paymentMethod || null,
     })
   }
 
   return (
     <form onSubmit={submit} className="space-y-4">
-      {error && <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">{error}</div>}
+      {error && (
+        <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">{error}</div>
+      )}
 
       <div>
         <label className="label">Service name</label>
@@ -77,6 +82,14 @@ export default function SubscriptionForm({ initial, onSubmit, onCancel }) {
           <label className="label">Hours used this month</label>
           <input type="number" min="0" step="0.5" className="input" value={form.hoursThisMonth} onChange={e => set('hoursThisMonth', e.target.value)} />
         </div>
+      </div>
+
+      <div>
+        <label className="label">Payment method</label>
+        <select className="input" value={form.paymentMethod || ''} onChange={e => set('paymentMethod', e.target.value)}>
+          <option value="">— select —</option>
+          {PAYMENTS.map(p => <option key={p} value={p}>{p}</option>)}
+        </select>
       </div>
 
       <div className="flex justify-end gap-2 pt-2">

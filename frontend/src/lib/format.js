@@ -14,8 +14,25 @@ export const categoryColor = (c) => {
     case 'entertainment': return 'bg-pink-500/15 text-pink-400 border border-pink-500/20'
     case 'learning':      return 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/20'
     case 'productivity':  return 'bg-indigo-500/15 text-indigo-400 border border-indigo-500/20'
+    case 'ai tools':
+    case 'ai_tools':      return 'bg-violet-500/15 text-violet-400 border border-violet-500/20'
+    case 'health':        return 'bg-amber-500/15 text-amber-400 border border-amber-500/20'
+    case 'utilities':     return 'bg-sky-500/15 text-sky-400 border border-sky-500/20'
     case 'budget':        return 'bg-amber-500/15 text-amber-400 border border-amber-500/20'
     default:              return 'bg-white/8 text-slate-400 border border-white/8'
+  }
+}
+
+export const categoryHex = (c) => {
+  switch ((c || '').toLowerCase()) {
+    case 'entertainment': return '#D4537E'
+    case 'learning':      return '#1D9E75'
+    case 'productivity':  return '#4F46E5'
+    case 'ai tools':
+    case 'ai_tools':      return '#8B5CF6'
+    case 'health':        return '#F59E0B'
+    case 'utilities':     return '#0EA5E9'
+    default:              return '#475569'
   }
 }
 
