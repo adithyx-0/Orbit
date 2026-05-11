@@ -82,7 +82,7 @@ function NotificationsCard({ subscriptions }) {
 
   const sendTest = () => {
     if (perm !== 'granted') return
-    new Notification('Orbit · Renewal reminder', {
+    new Notification('Prosit · Renewal reminder', {
       body: 'Test — your renewal alerts are working!',
     })
   }
@@ -254,7 +254,7 @@ function AgentsCard() {
         {showAndroid && (
           <div className="px-4 pb-4 border-t border-white/6 pt-4 space-y-3">
             <p className="text-xs text-slate-400 leading-relaxed">
-              Install the Orbit Android app, log in with your account (<span className="text-white">{user?.email}</span>), and grant <strong className="text-white">Usage access</strong> in Settings → Apps → Special app access. The app syncs hourly in the background.
+              Install the Prosit Android app, log in with your account (<span className="text-white">{user?.email}</span>), and grant <strong className="text-white">Usage access</strong> in Settings → Apps → Special app access. The app syncs hourly in the background.
             </p>
             <div className="space-y-2">
               <p className="text-xs text-slate-500 uppercase tracking-wide font-semibold">API endpoint</p>
@@ -327,7 +327,7 @@ function AgentsCard() {
               <p className="text-xs text-slate-500 uppercase tracking-wide font-semibold">Quick start</p>
               <div className="bg-[#0d0d18] border border-white/8 rounded-lg p-3">
                 <code className="text-xs text-slate-300 block">pip install requests pywin32</code>
-                <code className="text-xs text-slate-300 block mt-1">python orbit_agent.py</code>
+                <code className="text-xs text-slate-300 block mt-1">python prosit_agent.py</code>
               </div>
             </div>
           </div>
@@ -413,7 +413,7 @@ function AndroidInstallModal({ open, onClose }) {
                   <span className="text-white text-3xl font-black leading-none select-none">P</span>
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-white">Orbit for Android</h2>
+                  <h2 className="text-lg font-bold text-white">Prosit for Android</h2>
                   <p className="text-sm text-slate-400">Your subscription tracker · on the go</p>
                   <div className="flex items-center gap-1.5 mt-1.5">
                     {[1,2,3,4,5].map(i => (
@@ -430,7 +430,7 @@ function AndroidInstallModal({ open, onClose }) {
                   { icon: Wifi,       label: 'Auto usage sync'     },
                   { icon: BarChart2,  label: 'Live analytics'       },
                   { icon: Target,     label: 'Track your goals'     },
-                  { icon: Smartphone, label: 'Orbit AI on mobile'   },
+                  { icon: Smartphone, label: 'Prosit AI on mobile'   },
                 ].map(({ icon: Icon, label }) => (
                   <div key={label} className="flex items-center gap-2 bg-white/4 border border-white/6 rounded-xl px-3 py-2.5">
                     <Icon size={13} className="text-emerald-400 shrink-0" />
@@ -489,7 +489,7 @@ function AndroidInstallModal({ open, onClose }) {
               {/* Security */}
               <div className="flex items-center gap-2 text-xs text-slate-500">
                 <Shield size={11} className="shrink-0" />
-                Open source — verify the APK at github.com/adithyx-0/Orbit
+                Open source — verify the APK at github.com/adithyx-0/Prosit
               </div>
             </div>
           </motion.div>
@@ -501,21 +501,21 @@ function AndroidInstallModal({ open, onClose }) {
 
 // ── Android App card ───────────────────────────────────────────
 
-const APK_URL     = 'https://github.com/adithyx-0/Orbit/releases/latest/download/orbit-release.apk'
-const RELEASE_URL = 'https://github.com/adithyx-0/Orbit/releases/latest'
+const APK_URL     = 'https://github.com/adithyx-0/Prosit/releases/latest/download/prosit-release.apk'
+const RELEASE_URL = 'https://github.com/adithyx-0/Prosit/releases/latest'
 
 const APP_FEATURES = [
   { icon: Wifi,      text: 'Auto-tracks app usage in the background via Android UsageStats' },
   { icon: BarChart2, text: 'Syncs hours to your Analytics dashboard every hour' },
   { icon: Target,    text: 'View and update your Goals on the go' },
-  { icon: Smartphone,text: 'Manage Subscriptions, log usage, and chat with Orbit AI' },
+  { icon: Smartphone,text: 'Manage Subscriptions, log usage, and chat with Prosit AI' },
 ]
 
 const INSTALL_STEPS = [
-  { n: '1', title: 'Download the APK', body: 'Tap the button above to download orbit-release.apk to your Android device.' },
+  { n: '1', title: 'Download the APK', body: 'Tap the button above to download prosit-release.apk to your Android device.' },
   { n: '2', title: 'Allow unknown sources', body: 'Go to Settings → Security (or Apps) → Install unknown apps, and allow your browser or Files app.' },
   { n: '3', title: 'Open and install', body: 'Open the downloaded APK from your notifications or Files app and tap Install.' },
-  { n: '4', title: 'Grant Usage access', body: 'On first launch, tap "Grant permission" → find Orbit in the list → enable Usage access.' },
+  { n: '4', title: 'Grant Usage access', body: 'On first launch, tap "Grant permission" → find Prosit in the list → enable Usage access.' },
   { n: '5', title: 'Log in', body: 'Use the same email and password as your web account — your data syncs instantly.' },
 ]
 
@@ -531,7 +531,7 @@ function AndroidAppCard({ onOpenModal }) {
           <span className="text-white text-2xl font-black leading-none select-none">P</span>
         </div>
         <div className="flex-1 min-w-0">
-          <p className="text-base font-bold text-white">Orbit Android App</p>
+          <p className="text-base font-bold text-white">Prosit Android App</p>
           <p className="text-xs text-slate-400 mt-0.5">
             Auto-tracks your app usage and syncs to the dashboard
           </p>
@@ -595,7 +595,7 @@ function AndroidAppCard({ onOpenModal }) {
           <div className="mt-4 flex items-start gap-2 text-xs text-slate-500 bg-white/4 rounded-lg px-3 py-2.5">
             <Shield size={12} className="text-slate-400 shrink-0 mt-0.5" />
             The APK is built directly from this project's source code.
-            You can verify it at github.com/adithyx-0/Orbit before installing.
+            You can verify it at github.com/adithyx-0/Prosit before installing.
           </div>
         </div>
       )}
@@ -614,7 +614,7 @@ export default function Settings() {
 
   // Auto-show the install modal once per session
   useEffect(() => {
-    const seen = sessionStorage.getItem('orbit.app-modal-seen')
+    const seen = sessionStorage.getItem('prosit.app-modal-seen')
     if (!seen) {
       const t = setTimeout(() => setShowAppModal(true), 800)
       return () => clearTimeout(t)
@@ -622,7 +622,7 @@ export default function Settings() {
   }, [])
 
   const closeAppModal = () => {
-    sessionStorage.setItem('orbit.app-modal-seen', '1')
+    sessionStorage.setItem('prosit.app-modal-seen', '1')
     setShowAppModal(false)
   }
 

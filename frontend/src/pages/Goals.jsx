@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+﻿import { useState, useRef, useEffect } from 'react'
 import { Plus, Trash2, CheckCircle2, Pencil, Flame } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Modal from '../components/Modal.jsx'
@@ -33,7 +33,7 @@ function progressHex(pct) {
   return '#EF4444'
 }
 
-// ── Deadline badge ─────────────────────────────────────────────
+// â”€â”€ Deadline badge â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function DeadlineBadge({ deadline }) {
   if (!deadline) return null
   const days = daysLeft(deadline)
@@ -49,7 +49,7 @@ function DeadlineBadge({ deadline }) {
   return <span className={`text-[11px] font-medium ${cls}`}>{label}</span>
 }
 
-// ── Goal card ──────────────────────────────────────────────────
+// â”€â”€ Goal card â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function GoalCard({ goal, onUpdate, onDelete, onEdit, celebrating }) {
   const pct  = Math.min(100, Math.max(0, goal.progress ?? 0))
   const done = pct >= 100
@@ -146,7 +146,7 @@ function GoalCard({ goal, onUpdate, onDelete, onEdit, celebrating }) {
               className="text-[9px]"
               style={{ color: draft >= m ? progressHex(draft) : '#334155' }}
             >
-              {m === 100 ? '✓' : `${m}%`}
+              {m === 100 ? 'âœ“' : `${m}%`}
             </span>
           ))}
         </div>
@@ -163,8 +163,8 @@ function GoalCard({ goal, onUpdate, onDelete, onEdit, celebrating }) {
             className="flex items-center gap-1.5 text-xs font-semibold text-amber-400 justify-center pt-1 border-t border-white/6"
           >
             <CheckCircle2 size={13} />
-            Completed · great work!
-            <span className="text-sm">⭐</span>
+            Completed Â· great work!
+            <span className="text-sm">â­</span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -172,7 +172,7 @@ function GoalCard({ goal, onUpdate, onDelete, onEdit, celebrating }) {
   )
 }
 
-// ── Edit goal form ─────────────────────────────────────────────
+// â”€â”€ Edit goal form â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function EditGoalForm({ goal, onSubmit, onCancel }) {
   const [form, setForm] = useState({
     title:                goal.title,
@@ -233,7 +233,7 @@ function EditGoalForm({ goal, onSubmit, onCancel }) {
   )
 }
 
-// ── Side panel ─────────────────────────────────────────────────
+// â”€â”€ Side panel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function TreePanel({ goals }) {
   const { gamification } = useData()
   const { score, starCount, streak } = gamification
@@ -310,11 +310,11 @@ function Stat({ value, label }) {
   )
 }
 
-// ── Section group ──────────────────────────────────────────────
+// â”€â”€ Section group â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function GoalGroup({ title, goals, onUpdate, onDelete, onEdit, celebrating }) {
   return (
     <div>
-      <p className="micro-label mb-3">{title} · {goals.length}</p>
+      <p className="micro-label mb-3">{title} Â· {goals.length}</p>
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -336,7 +336,7 @@ function GoalGroup({ title, goals, onUpdate, onDelete, onEdit, celebrating }) {
   )
 }
 
-// ── Page ───────────────────────────────────────────────────────
+// â”€â”€ Page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export default function Goals() {
   const { goals, addGoal, updateGoal, deleteGoal, gamification } = useData()
   const [openAdd, setOpenAdd] = useState(false)
@@ -386,7 +386,7 @@ export default function Goals() {
         <div>
           <p className="micro-label mb-1">Gamification</p>
           <h1 className="page-title">Goals</h1>
-          <p className="page-subtitle mt-1">Complete goals · earn stars · grow your tree.</p>
+          <p className="page-subtitle mt-1">Complete goals Â· earn stars Â· grow your tree.</p>
         </div>
         <button className="btn-primary shrink-0" onClick={() => setOpenAdd(true)}>
           <Plus size={15} className="-ml-0.5" /> New goal
@@ -427,7 +427,7 @@ export default function Goals() {
               className="card p-12 text-center"
             >
               <div className="w-12 h-12 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl select-none">⭐</span>
+                <span className="text-2xl select-none">â­</span>
               </div>
               <p className="text-slate-400 text-sm mb-4">
                 No goals yet. Add one to start growing your Star Tree.
@@ -456,7 +456,7 @@ export default function Goals() {
           {/* AI coaching panel */}
           {goals.length > 0 && (
             <AiPanel
-              title="Orbit AI · Goal Coach"
+              title="Prosit AI Â· Goal Coach"
               subtitle="Get personalised coaching based on your current progress"
               prompt="Review all my goals, their progress percentages, and deadlines. Which goals am I at risk of missing? What should I focus on this week? Give me practical, motivating coaching advice in 3-4 bullet points."
             />

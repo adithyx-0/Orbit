@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+﻿import { useMemo } from 'react'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell,
   PieChart, Pie,
@@ -120,14 +120,14 @@ export default function Analytics() {
     return [sorted[0], sorted[sorted.length - 1]]
   }, [active])
 
-  if (loading) return <div className="flex items-center justify-center h-64 text-slate-500">Loading…</div>
+  if (loading) return <div className="flex items-center justify-center h-64 text-slate-500">Loadingâ€¦</div>
   if (error)   return <div className="flex items-center justify-center h-64 text-red-500">{error}</div>
 
   return (
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold">Analytics</h1>
-        <p className="text-sm text-slate-500">ROI, spending breakdown, and usage insights — powered by real data.</p>
+        <p className="text-sm text-slate-500">ROI, spending breakdown, and usage insights â€” powered by real data.</p>
       </div>
 
       {/* Stats row */}
@@ -150,7 +150,7 @@ export default function Analytics() {
         />
         <StatCard
           label="Best value"
-          value={bestValue ? bestValue.name : '—'}
+          value={bestValue ? bestValue.name : 'â€”'}
           sub={bestValue
             ? `${currency(bestValue.cost / bestValue.hoursThisMonth)}/hr`
             : 'log hours to calculate'}
@@ -159,7 +159,7 @@ export default function Analytics() {
 
       {/* AI Insights */}
       <AiPanel
-        title="Orbit AI · Spending Analysis"
+        title="Prosit AI Â· Spending Analysis"
         subtitle="Get a personalised ROI breakdown and action plan"
         prompt="Analyse my subscriptions in detail. Based on my usage hours vs cost, which services have the worst ROI? Which should I cancel or downgrade? Give me 3 specific action points to reduce my monthly spend while keeping value."
       />
@@ -175,7 +175,7 @@ export default function Analytics() {
               </div>
               <p className="text-white font-semibold">{bestValue.name}</p>
               <p className="text-xs text-slate-400 mt-1">
-                {currency(bestValue.cost)}/mo · {hours(bestValue.hoursThisMonth)} used ·{' '}
+                {currency(bestValue.cost)}/mo Â· {hours(bestValue.hoursThisMonth)} used Â·{' '}
                 <span className="text-emerald-400 font-medium">
                   {currency(bestValue.cost / bestValue.hoursThisMonth)}/hr
                 </span>
@@ -190,7 +190,7 @@ export default function Analytics() {
               </div>
               <p className="text-white font-semibold">{worstValue.name}</p>
               <p className="text-xs text-slate-400 mt-1">
-                {currency(worstValue.cost)}/mo · {hours(worstValue.hoursThisMonth)} used ·{' '}
+                {currency(worstValue.cost)}/mo Â· {hours(worstValue.hoursThisMonth)} used Â·{' '}
                 <span className="text-red-400 font-medium">
                   {currency(worstValue.cost / worstValue.hoursThisMonth)}/hr
                 </span>
@@ -202,7 +202,7 @@ export default function Analytics() {
               <div className="flex items-center gap-2 mb-3">
                 <AlertCircle size={14} className="text-amber-400" />
                 <p className="text-xs font-semibold text-amber-400 uppercase tracking-wide">
-                  Unused this month · {currency(unusedSubs.reduce((s, sub) => s + sub.cost, 0))} wasted
+                  Unused this month Â· {currency(unusedSubs.reduce((s, sub) => s + sub.cost, 0))} wasted
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
@@ -211,7 +211,7 @@ export default function Analytics() {
                     key={s.id}
                     className="text-xs bg-amber-500/10 text-amber-300 border border-amber-500/20 px-2.5 py-1 rounded-full"
                   >
-                    {s.name} · {currency(s.cost)}/mo
+                    {s.name} Â· {currency(s.cost)}/mo
                   </span>
                 ))}
               </div>
@@ -293,13 +293,13 @@ export default function Analytics() {
           )}
         </div>
 
-        {/* Cost per hour bar — colour-coded by ROI */}
+        {/* Cost per hour bar â€” colour-coded by ROI */}
         <div className="card p-6">
           <h2 className="font-semibold mb-1">Cost per hour by service</h2>
           <p className="text-xs text-slate-500 mb-5">
-            <span className="text-emerald-400">■</span> &lt;₹20 great ·{' '}
-            <span className="text-amber-400">■</span> ₹20-60 okay ·{' '}
-            <span className="text-red-400">■</span> ₹60+ / unused
+            <span className="text-emerald-400">â– </span> &lt;â‚¹20 great Â·{' '}
+            <span className="text-amber-400">â– </span> â‚¹20-60 okay Â·{' '}
+            <span className="text-red-400">â– </span> â‚¹60+ / unused
           </p>
           {cphData.length === 0 ? (
             <div className="h-64 flex items-center justify-center text-slate-500 text-sm">No data.</div>
@@ -321,10 +321,10 @@ export default function Analytics() {
                     tick={{ fontSize: 10, fill: '#64748b' }}
                     tickLine={false}
                     axisLine={false}
-                    tickFormatter={v => '₹' + v}
+                    tickFormatter={v => 'â‚¹' + v}
                   />
                   <Tooltip content={<DarkTooltip fmt={currency} />} />
-                  <Bar dataKey="costPerHour" name="₹ / hr" radius={[5, 5, 0, 0]}>
+                  <Bar dataKey="costPerHour" name="â‚¹ / hr" radius={[5, 5, 0, 0]}>
                     {cphData.map((d, i) => (
                       <Cell key={i} fill={roiHex(d.costPerHour)} />
                     ))}
@@ -351,7 +351,7 @@ export default function Analytics() {
                 <th className="text-right">Monthly</th>
                 <th className="text-right">Annual</th>
                 <th className="text-right">Hours</th>
-                <th className="text-right">₹ / hr</th>
+                <th className="text-right">â‚¹ / hr</th>
                 <th className="text-right">ROI</th>
               </tr>
             </thead>
@@ -378,7 +378,7 @@ export default function Analytics() {
                     <td className="text-right text-slate-500">{currency(r.cost * 12)}</td>
                     <td className="text-right">{hours(r.hours)}</td>
                     <td className="text-right">
-                      {r.costPerHour ? currency(r.costPerHour) : <span className="text-slate-500">—</span>}
+                      {r.costPerHour ? currency(r.costPerHour) : <span className="text-slate-500">â€”</span>}
                     </td>
                     <td className="text-right">
                       <span className="text-xs font-semibold" style={{ color }}>{text}</span>

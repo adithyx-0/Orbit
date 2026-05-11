@@ -5,7 +5,7 @@ import api from '../lib/api.js'
 
 const WELCOME = {
   role: 'bot',
-  text: "Hi! I'm Orbit AI. Ask me anything about your subscriptions — spending, ROI, what to cancel, or savings tips.",
+  text: "Hi! I'm Prosit AI. Ask me anything about your subscriptions — spending, ROI, what to cancel, or savings tips.",
 }
 
 export default function ChatWidget() {
@@ -59,7 +59,7 @@ export default function ChatWidget() {
             {/* Header */}
             <div className="flex items-center gap-2.5 px-4 py-3 border-b border-white/8 bg-brand-600/10 shrink-0">
               <Sparkles size={15} className="text-brand-400" />
-              <span className="text-sm font-semibold text-white">Orbit AI</span>
+              <span className="text-sm font-semibold text-white">Prosit AI</span>
               <span className="text-xs text-slate-500 ml-auto">subscription assistant</span>
               <button
                 onClick={() => setOpen(false)}

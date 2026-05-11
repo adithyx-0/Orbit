@@ -37,7 +37,7 @@ export default function Login() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(99,102,241,0.15)_0%,_transparent_60%)]" />
         <div className="relative flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center font-black text-lg">O</div>
-          <span className="font-bold tracking-wide text-lg">Orbit</span>
+          <span className="font-bold tracking-wide text-lg">Prosit</span>
         </div>
         <div className="relative">
           <h1 className="text-4xl font-black leading-tight">
@@ -68,7 +68,7 @@ export default function Login() {
           {/* Mobile logo */}
           <div className="flex items-center gap-2 mb-8 lg:hidden">
             <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center font-black text-white text-sm">O</div>
-            <span className="font-bold">Orbit</span>
+            <span className="font-bold">Prosit</span>
           </div>
 
           <h2 className="text-2xl font-bold">Sign in</h2>
@@ -110,7 +110,7 @@ export default function Login() {
           </form>
 
           <div className="mt-6 pt-6 border-t border-white/6 text-center">
-            <p className="text-sm text-slate-500">New to Orbit?</p>
+            <p className="text-sm text-slate-500">New to Prosit?</p>
             <Link
               to="/"
               className="mt-2 btn-secondary w-full justify-center text-sm block"

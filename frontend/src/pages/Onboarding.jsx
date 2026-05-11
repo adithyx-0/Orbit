@@ -57,7 +57,7 @@ function Landing({ onStart }) {
           <div className="w-11 h-11 rounded-xl bg-brand-600 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-brand-900/40">
             O
           </div>
-          <span className="text-2xl font-bold tracking-tight">Orbit</span>
+          <span className="text-2xl font-bold tracking-tight">Prosit</span>
         </div>
 
         {/* Headline */}
@@ -70,7 +70,7 @@ function Landing({ onStart }) {
         </h1>
 
         <p className="mt-6 text-lg text-slate-400 leading-relaxed max-w-md mx-auto">
-          Orbit tracks every subscription you pay for, measures real cost-per-hour, and tells you exactly what's worth keeping.
+          Prosit tracks every subscription you pay for, measures real cost-per-hour, and tells you exactly what's worth keeping.
         </p>
 
         {/* Feature chips */}
@@ -191,7 +191,7 @@ export default function Onboarding() {
     },
     2: {
       title:    "What's your monthly budget?",
-      subtitle: 'Orbit will flag anything that goes over your limit.',
+      subtitle: 'Prosit will flag anything that goes over your limit.',
       node: (
         <div className="space-y-2">
           {BUDGETS.map(b => {
@@ -223,7 +223,7 @@ export default function Onboarding() {
       canNext: !!budget,
     },
     3: {
-      title:    'What do you want from Orbit?',
+      title:    'What do you want from Prosit?',
       subtitle: 'Pick everything that matters to you.',
       node: (
         <div className="space-y-2">

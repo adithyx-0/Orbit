@@ -15,7 +15,7 @@ export default function AiPanel({ prompt, title, subtitle }) {
       const { data } = await api.post('/chat', { message: prompt })
       setReply(data.reply)
     } catch {
-      setReply('Could not reach Orbit AI — check your connection.')
+      setReply('Could not reach Prosit AI — check your connection.')
     } finally {
       setLoading(false)
     }
@@ -67,7 +67,7 @@ export default function AiPanel({ prompt, title, subtitle }) {
                 style={{ animationDelay: `${d}ms` }}
               />
             ))}
-            <span className="text-xs text-slate-500 ml-1">Orbit AI is analysing your data…</span>
+            <span className="text-xs text-slate-500 ml-1">Prosit AI is analysing your data…</span>
           </div>
         </div>
       )}
