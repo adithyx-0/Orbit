@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowRight, ArrowLeft, Check, BarChart2, Bell, Target, Sparkles } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Check, BarChart2, Bell, Target, Sparkles, Zap } from 'lucide-react'
 import PrositLogo from '../components/PrositLogo.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 
