@@ -17,12 +17,11 @@ router.get('/', async (req, res, next) => {
        ORDER BY date ASC`,
       [req.user.id, days]
     )
-    // Reshape into [{date, learning, entertainment, productivity}, ...]
+    // Reshape into [{date, <category>: minutes, ...}] — all categories included dynamically
     const map = {}
     for (const row of rows) {
-      if (!map[row.date]) map[row.date] = { date: row.date, learning: 0, entertainment: 0, productivity: 0 }
-      const key = row.category.toLowerCase()
-      if (key in map[row.date]) map[row.date][key] = Number(row.minutes)
+      if (!map[row.date]) map[row.date] = { date: row.date }
+      map[row.date][row.category.toLowerCase()] = Number(row.minutes)
     }
     res.json({ usage: Object.values(map) })
   } catch (err) { next(err) }

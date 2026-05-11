@@ -1,12 +1,17 @@
+import { useMemo } from 'react'
 import {
   ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts'
 
-const SERIES = [
-  { key: 'productivity', color: '#3b63ff', label: 'Productivity' },
-  { key: 'learning',     color: '#10b981', label: 'Learning' },
-  { key: 'entertainment', color: '#ec4899', label: 'Entertainment' },
-]
+const CAT_COLORS = {
+  productivity:  '#3b63ff',
+  learning:      '#10b981',
+  entertainment: '#ec4899',
+  'ai tools':    '#8b5cf6',
+  ai_tools:      '#8b5cf6',
+  health:        '#f59e0b',
+  utilities:     '#0ea5e9',
+}
 
 function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null
@@ -25,6 +30,17 @@ function CustomTooltip({ active, payload, label }) {
 }
 
 export default function UsageTrendChart({ data }) {
+  const series = useMemo(() => {
+    if (!data?.length) return []
+    return Object.keys(data[0])
+      .filter(k => k !== 'date')
+      .map(key => ({
+        key,
+        color: CAT_COLORS[key] ?? '#94a3b8',
+        label: key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' '),
+      }))
+  }, [data])
+
   const isEmpty = !data || data.length === 0
 
   return (
@@ -44,7 +60,7 @@ export default function UsageTrendChart({ data }) {
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={data} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
                 <defs>
-                  {SERIES.map(s => (
+                  {series.map(s => (
                     <linearGradient key={s.key} id={`grad-${s.key}`} x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%"  stopColor={s.color} stopOpacity={0.25} />
                       <stop offset="95%" stopColor={s.color} stopOpacity={0} />
@@ -69,7 +85,7 @@ export default function UsageTrendChart({ data }) {
                   axisLine={false}
                 />
                 <Tooltip content={<CustomTooltip />} />
-                {SERIES.map(s => (
+                {series.map(s => (
                   <Area
                     key={s.key}
                     type="monotone"
@@ -88,7 +104,7 @@ export default function UsageTrendChart({ data }) {
 
           {/* Legend */}
           <div className="flex items-center gap-5 mt-3">
-            {SERIES.map(s => (
+            {series.map(s => (
               <div key={s.key} className="flex items-center gap-1.5 text-xs text-slate-400">
                 <span className="w-2.5 h-0.5 rounded-full" style={{ background: s.color }} />
                 {s.label}
