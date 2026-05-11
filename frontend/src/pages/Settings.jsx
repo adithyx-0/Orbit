@@ -609,7 +609,8 @@ export default function Settings() {
   const { user, logout } = useAuth()
   const { subscriptions } = useData()
 
-  const [showAppModal, setShowAppModal] = useState(false)
+  const [showAppModal,  setShowAppModal]  = useState(false)
+  const [showAdvanced,  setShowAdvanced]  = useState(false)
 
   // Auto-show the install modal once per session
   useEffect(() => {
@@ -676,10 +677,10 @@ export default function Settings() {
     <div className="space-y-6 max-w-2xl">
       <div>
         <h1 className="text-2xl font-bold">Settings</h1>
-        <p className="text-sm text-slate-500">Account, notifications, agents, and usage logging.</p>
+        <p className="text-sm text-slate-500">Manage your account and app preferences.</p>
       </div>
 
-      {/* Account */}
+      {/* Account — always visible */}
       <div className="card p-6">
         <h2 className="font-semibold mb-4">Account</h2>
         <div className="grid sm:grid-cols-2 gap-4 text-sm">
@@ -695,112 +696,156 @@ export default function Settings() {
         <button onClick={logout} className="mt-5 btn-danger text-sm">Sign out</button>
       </div>
 
-      {/* Renewal notifications */}
-      <NotificationsCard subscriptions={subscriptions} />
-
-      {/* Device agents */}
-      <AgentsCard />
-
-      {/* Android app download */}
+      {/* Android app — always visible */}
       <AndroidAppCard onOpenModal={() => setShowAppModal(true)} />
 
       {/* Android install modal */}
       <AndroidInstallModal open={showAppModal} onClose={closeAppModal} />
 
-      {/* Log usage manually */}
-      <div className="card p-6">
-        <h2 className="font-semibold mb-1">Log usage manually</h2>
-        <p className="text-sm text-slate-500 mb-4">
-          No device agent? Enter your usage here — it powers the Analytics charts and AI recommendations.
-        </p>
-        <form onSubmit={logUsage} className="space-y-4">
-          <div className="grid sm:grid-cols-2 gap-3">
-            <div>
-              <label className="label">Date</label>
-              <input
-                type="date" className="input"
-                value={usageForm.date}
-                onChange={e => setField('date', e.target.value)}
-                max={new Date().toISOString().slice(0, 10)}
-                required
-              />
-            </div>
-            <div>
-              <label className="label">Category</label>
-              <select className="input" value={usageForm.category} onChange={e => setField('category', e.target.value)}>
-                {USAGE_CATEGORIES.map(c => <option key={c}>{c}</option>)}
-              </select>
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-3">
-            <div>
-              <label className="label">Minutes</label>
-              <input
-                type="number" min="1" max="1440" className="input"
-                value={usageForm.minutes}
-                onChange={e => setField('minutes', e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <label className="label">App / service (optional)</label>
-              <input
-                className="input" placeholder="e.g. Netflix, Coursera"
-                value={usageForm.app_name}
-                onChange={e => setField('app_name', e.target.value)}
-              />
-            </div>
-          </div>
-          {usageError && (
-            <div className="text-sm text-red-400 p-2 rounded-lg bg-red-500/10 border border-red-500/20">{usageError}</div>
-          )}
-          <div className="flex items-center gap-3">
-            <button type="submit" className="btn-primary" disabled={usageSaving}>
-              {usageSaving ? 'Saving…' : 'Log usage'}
-            </button>
-            {usageSaved && (
-              <span className="flex items-center gap-1.5 text-sm text-emerald-400">
-                <CheckCircle2 size={14} /> Saved
-              </span>
-            )}
-          </div>
-        </form>
-      </div>
-
-      {/* Demo data */}
-      <div className="card p-6">
-        <div className="flex items-start gap-3 mb-4">
-          <div className="w-9 h-9 rounded-xl bg-brand-600/10 border border-brand-500/20 flex items-center justify-center shrink-0 mt-0.5">
-            <Database size={15} className="text-brand-400" />
+      {/* ── Advanced toggle ── */}
+      <button
+        onClick={() => setShowAdvanced(v => !v)}
+        className="w-full flex items-center justify-between gap-3 px-4 py-3 rounded-xl border border-white/8 bg-white/3 hover:bg-white/6 hover:border-white/12 transition-all text-left group"
+      >
+        <div className="flex items-center gap-3">
+          <div className="w-7 h-7 rounded-lg bg-white/8 flex items-center justify-center">
+            <Shield size={13} className="text-slate-400" />
           </div>
           <div>
-            <h2 className="font-semibold">Load demo data</h2>
-            <p className="text-sm text-slate-500 mt-0.5">
-              Fills your account with 12 realistic subscriptions, 6 goals, and 14 days of usage — great for exploring all features.
+            <p className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">
+              Advanced settings
+            </p>
+            <p className="text-xs text-slate-600">
+              Notifications · Agents · Usage logging · Demo data
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-3 flex-wrap">
-          <button
-            onClick={loadDemo}
-            disabled={demoLoading}
-            className="btn-secondary gap-1.5 text-sm"
+        <motion.div
+          animate={{ rotate: showAdvanced ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ChevronDown size={16} className="text-slate-500 group-hover:text-slate-300 transition-colors" />
+        </motion.div>
+      </button>
+
+      {/* Collapsible advanced sections */}
+      <AnimatePresence initial={false}>
+        {showAdvanced && (
+          <motion.div
+            key="advanced"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            className="overflow-hidden"
           >
-            {demoLoading
-              ? <><RefreshCw size={13} className="animate-spin" /> Loading…</>
-              : <><Database size={13} /> Load demo data</>
-            }
-          </button>
-          <span className="text-xs text-slate-500 flex items-center gap-1">
-            <Trash2 size={11} /> Replaces existing data
-          </span>
-        </div>
-        {demoMsg && (
-          <p className={`mt-3 text-sm ${demoMsg.includes('Failed') ? 'text-red-400' : 'text-emerald-400'}`}>
-            {demoMsg}
-          </p>
+            <div className="space-y-6 pt-0">
+
+              {/* Renewal notifications */}
+              <NotificationsCard subscriptions={subscriptions} />
+
+              {/* Device agents */}
+              <AgentsCard />
+
+              {/* Log usage manually */}
+              <div className="card p-6">
+                <h2 className="font-semibold mb-1">Log usage manually</h2>
+                <p className="text-sm text-slate-500 mb-4">
+                  No device agent? Enter your usage here — it powers the Analytics charts and AI recommendations.
+                </p>
+                <form onSubmit={logUsage} className="space-y-4">
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="label">Date</label>
+                      <input
+                        type="date" className="input"
+                        value={usageForm.date}
+                        onChange={e => setField('date', e.target.value)}
+                        max={new Date().toISOString().slice(0, 10)}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="label">Category</label>
+                      <select className="input" value={usageForm.category} onChange={e => setField('category', e.target.value)}>
+                        {USAGE_CATEGORIES.map(c => <option key={c}>{c}</option>)}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="label">Minutes</label>
+                      <input
+                        type="number" min="1" max="1440" className="input"
+                        value={usageForm.minutes}
+                        onChange={e => setField('minutes', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="label">App / service (optional)</label>
+                      <input
+                        className="input" placeholder="e.g. Netflix, Coursera"
+                        value={usageForm.app_name}
+                        onChange={e => setField('app_name', e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  {usageError && (
+                    <div className="text-sm text-red-400 p-2 rounded-lg bg-red-500/10 border border-red-500/20">{usageError}</div>
+                  )}
+                  <div className="flex items-center gap-3">
+                    <button type="submit" className="btn-primary" disabled={usageSaving}>
+                      {usageSaving ? 'Saving…' : 'Log usage'}
+                    </button>
+                    {usageSaved && (
+                      <span className="flex items-center gap-1.5 text-sm text-emerald-400">
+                        <CheckCircle2 size={14} /> Saved
+                      </span>
+                    )}
+                  </div>
+                </form>
+              </div>
+
+              {/* Demo data */}
+              <div className="card p-6">
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="w-9 h-9 rounded-xl bg-brand-600/10 border border-brand-500/20 flex items-center justify-center shrink-0 mt-0.5">
+                    <Database size={15} className="text-brand-400" />
+                  </div>
+                  <div>
+                    <h2 className="font-semibold">Load demo data</h2>
+                    <p className="text-sm text-slate-500 mt-0.5">
+                      Fills your account with 12 realistic subscriptions, 6 goals, and 14 days of usage.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 flex-wrap">
+                  <button
+                    onClick={loadDemo}
+                    disabled={demoLoading}
+                    className="btn-secondary gap-1.5 text-sm"
+                  >
+                    {demoLoading
+                      ? <><RefreshCw size={13} className="animate-spin" /> Loading…</>
+                      : <><Database size={13} /> Load demo data</>
+                    }
+                  </button>
+                  <span className="text-xs text-slate-500 flex items-center gap-1">
+                    <Trash2 size={11} /> Replaces existing data
+                  </span>
+                </div>
+                {demoMsg && (
+                  <p className={`mt-3 text-sm ${demoMsg.includes('Failed') ? 'text-red-400' : 'text-emerald-400'}`}>
+                    {demoMsg}
+                  </p>
+                )}
+              </div>
+
+            </div>
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
     </div>
   )
 }
