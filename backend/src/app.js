@@ -12,11 +12,13 @@ import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  process.env.FRONTEND_URL,
+].filter(Boolean)
+
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://prosit-ej7i.onrender.com',
-  ],
+  origin: allowedOrigins,
   credentials: true,
 }))
 app.use(express.json())

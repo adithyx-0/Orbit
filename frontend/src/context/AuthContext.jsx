@@ -17,17 +17,25 @@ export function AuthProvider({ children }) {
   }, [])
 
   const login = async ({ email, password }) => {
-    const { data } = await api.post('/auth/login', { email, password })
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-    setUser(data.user)
-    return data
+    try {
+      const { data } = await api.post('/auth/login', { email, password })
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+      setUser(data.user)
+      return data
+    } catch (err) {
+      throw new Error(err.response?.data?.error || err.message || 'Login failed')
+    }
   }
 
   const signup = async ({ name, email, password }) => {
-    const { data } = await api.post('/auth/register', { name, email, password })
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
-    setUser(data.user)
-    return data
+    try {
+      const { data } = await api.post('/auth/register', { name, email, password })
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+      setUser(data.user)
+      return data
+    } catch (err) {
+      throw new Error(err.response?.data?.error || err.message || 'Signup failed')
+    }
   }
 
   const logout = () => {

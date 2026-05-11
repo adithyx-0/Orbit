@@ -20,12 +20,19 @@ const GAMIFICATION_DEFAULT = {
   streak: { currentStreak: 0, longestStreak: 0, lastActiveDate: null },
 }
 
+// Coerce a DB date value (string or ISO timestamp) to "YYYY-MM-DD"
+function toDateStr(v) {
+  if (!v) return null
+  if (typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v)) return v
+  return new Date(v).toISOString().slice(0, 10)
+}
+
 function toCamel(s) {
   return {
     ...s,
     billingCycle:    s.billing_cycle,
     hoursThisMonth:  parseFloat(s.hours_this_month || 0),
-    renewsOn:        s.renews_on,
+    renewsOn:        toDateStr(s.renews_on),
   }
 }
 
@@ -34,6 +41,7 @@ function toGoal(g) {
     ...g,
     progress:               parseFloat(g.progress ?? 0),
     target_hours_per_week:  parseFloat(g.target_hours_per_week ?? 0),
+    deadline:               toDateStr(g.deadline),
   }
 }
 
