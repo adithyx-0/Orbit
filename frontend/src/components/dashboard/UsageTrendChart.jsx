@@ -17,7 +17,7 @@ function CustomTooltip({ active, payload, label }) {
         <div key={p.dataKey} className="flex items-center gap-2 mb-1">
           <span className="w-1.5 h-1.5 rounded-full" style={{ background: p.color }} />
           <span className="text-slate-300">{p.name}</span>
-          <span className="ml-auto text-white font-medium">{p.value} min</span>
+          <span className="ml-auto font-medium" style={{ color: 'var(--c-text)' }}>{p.value} min</span>
         </div>
       ))}
     </div>

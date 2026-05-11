@@ -43,7 +43,7 @@ export default function StatCard({
           )}
         </div>
 
-        <div className="mt-3 text-2xl font-bold text-white tracking-tight">{value}</div>
+        <div className="mt-3 text-2xl font-bold tracking-tight" style={{ color: 'var(--c-text)' }}>{value}</div>
 
         {sub && (
           <div className="mt-1 text-xs text-slate-500 flex items-center gap-1">

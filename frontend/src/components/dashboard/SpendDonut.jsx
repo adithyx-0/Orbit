@@ -9,7 +9,7 @@ function CustomTooltip({ active, payload }) {
   return (
     <div className="bg-surface-3 border border-white/10 rounded-xl px-3 py-2 shadow-modal text-xs">
       <span className="text-slate-300">{name}: </span>
-      <span className="text-white font-semibold">{currency(value)}</span>
+      <span className="font-semibold" style={{ color: 'var(--c-text)' }}>{currency(value)}</span>
     </div>
   )
 }
@@ -50,7 +50,7 @@ export default function SpendDonut({ data }) {
             {/* Center label */}
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
               <div className="text-xs text-slate-500">total</div>
-              <div className="text-lg font-bold text-white">{currency(total)}</div>
+              <div className="text-lg font-bold" style={{ color: 'var(--c-text)' }}>{currency(total)}</div>
             </div>
           </div>
 

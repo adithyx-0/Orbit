@@ -54,7 +54,7 @@ export default function GoalsSnapshot({ goals }) {
                         CATEGORY_COLOR[catKey] ?? 'bg-slate-500'
                       )}
                     />
-                    <span className="text-sm text-white truncate">{g.title}</span>
+                    <span className="text-sm truncate" style={{ color: 'var(--c-text)' }}>{g.title}</span>
                   </div>
                   <span className="text-xs text-slate-400 shrink-0">{pct}%</span>
                 </div>

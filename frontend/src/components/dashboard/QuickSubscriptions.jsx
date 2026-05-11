@@ -40,13 +40,13 @@ export default function QuickSubscriptions({ subscriptions }) {
                   {s.name?.[0]?.toUpperCase() ?? '?'}
                 </div>
                 <div className="min-w-0">
-                  <div className="text-sm font-medium text-white truncate">{s.name}</div>
+                  <div className="text-sm font-medium truncate" style={{ color: 'var(--c-text)' }}>{s.name}</div>
                   <div className="text-[11px] text-slate-500">{hours(s.hoursThisMonth)} this month</div>
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 <Badge variant={categoryVariant(s.category)} size="sm">{s.category}</Badge>
-                <span className="text-sm font-semibold text-white">{currency(s.cost)}</span>
+                <span className="text-sm font-semibold" style={{ color: 'var(--c-text)' }}>{currency(s.cost)}</span>
               </div>
             </li>
           ))}

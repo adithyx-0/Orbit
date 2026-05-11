@@ -44,13 +44,13 @@ export default function UpcomingRenewals({ subscriptions }) {
                   {s.name?.[0]?.toUpperCase() ?? '?'}
                 </div>
                 <div className="min-w-0">
-                  <div className="text-sm font-medium text-white truncate">{s.name}</div>
+                  <div className="text-sm font-medium truncate" style={{ color: 'var(--c-text)' }}>{s.name}</div>
                   <div className={`text-[11px] font-medium ${urgencyClass(s.daysLeft)}`}>
                     {s.daysLeft === 0 ? 'Today' : s.daysLeft === 1 ? 'Tomorrow' : `in ${s.daysLeft} days`}
                   </div>
                 </div>
               </div>
-              <span className="text-sm font-semibold text-white shrink-0">{currency(s.cost)}</span>
+              <span className="text-sm font-semibold shrink-0" style={{ color: 'var(--c-text)' }}>{currency(s.cost)}</span>
             </li>
           ))}
         </ul>

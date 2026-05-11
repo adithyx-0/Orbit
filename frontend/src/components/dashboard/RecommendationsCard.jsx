@@ -41,7 +41,7 @@ export default function RecommendationsCard({ recommendations }) {
                     <Badge variant={severityVariant(r.severity)} size="sm" dot>
                       {r.severity}
                     </Badge>
-                    <span className="text-sm font-medium text-white truncate">{r.title}</span>
+                    <span className="text-sm font-medium truncate" style={{ color: 'var(--c-text)' }}>{r.title}</span>
                   </div>
                   <p className="text-xs text-slate-500 leading-relaxed">{r.body}</p>
                 </div>
