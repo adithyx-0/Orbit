@@ -28,6 +28,21 @@ router.get('/', async (req, res, next) => {
   } catch (err) { next(err) }
 })
 
+// GET /api/usage/sources  — returns last-sync date per agent source
+router.get('/sources', async (req, res, next) => {
+  try {
+    const { rows } = await pool.query(
+      `SELECT source, MAX(date) AS last_date, COUNT(*)::int AS total_logs
+       FROM usage_logs
+       WHERE user_id=$1
+       GROUP BY source
+       ORDER BY last_date DESC`,
+      [req.user.id]
+    )
+    res.json({ sources: rows })
+  } catch (err) { next(err) }
+})
+
 // POST /api/usage  — used by Android/Windows agents
 router.post('/', async (req, res, next) => {
   try {

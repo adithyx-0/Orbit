@@ -7,6 +7,7 @@ import usageRoutes from './routes/usage.js'
 import analyticsRoutes from './routes/analytics.js'
 import chatRoutes from './routes/chat.js'
 import gamificationRoutes from './routes/gamification.js'
+import seedRoutes from './routes/seed.js'
 import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
@@ -27,6 +28,7 @@ app.use('/api/usage', usageRoutes)
 app.use('/api/analytics', analyticsRoutes)
 app.use('/api/chat', chatRoutes)
 app.use('/api/gamification', gamificationRoutes)
+app.use('/api/seed', seedRoutes)
 
 app.get('/health', (_, res) => res.json({ status: 'ok' }))
 
