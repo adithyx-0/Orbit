@@ -1,5 +1,7 @@
 .env
 categories.json
+queue.json
+prosit_agent.log
 __pycache__/
 *.pyc
 *.pyo
