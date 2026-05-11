@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   CheckCircle2, Bell, BellOff, Smartphone, Monitor, Copy, Check,
   ChevronDown, ChevronUp, RefreshCw, Trash2, Database, Download,
-  Wifi, BarChart2, Target, Shield,
+  Wifi, BarChart2, Target, Shield, X, Star,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useData } from '../context/DataContext.jsx'
@@ -351,6 +352,153 @@ function AgentsCard() {
   )
 }
 
+// ── Android Install Modal ──────────────────────────────────────
+
+function AndroidInstallModal({ open, onClose }) {
+  // Lock body scroll while open
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    window.addEventListener('keydown', handler)
+    return () => window.removeEventListener('keydown', handler)
+  }, [open, onClose])
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          onClick={onClose}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
+
+          {/* Panel */}
+          <motion.div
+            className="relative w-full sm:max-w-md bg-[#0d0d18] border border-white/10 sm:rounded-2xl rounded-t-2xl overflow-hidden shadow-2xl"
+            initial={{ y: 60, opacity: 0, scale: 0.97 }}
+            animate={{ y: 0,  opacity: 1, scale: 1 }}
+            exit={{   y: 60, opacity: 0, scale: 0.97 }}
+            transition={{ duration: 0.25, ease: [0.25, 0.4, 0.25, 1] }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Top accent */}
+            <div className="h-0.5 w-full bg-gradient-to-r from-emerald-500/0 via-emerald-500/60 to-emerald-500/0" />
+
+            {/* Drag handle (mobile) */}
+            <div className="w-10 h-1 rounded-full bg-white/15 mx-auto mt-3 sm:hidden" />
+
+            {/* Close */}
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 p-1.5 rounded-lg text-slate-500 hover:text-white hover:bg-white/8 transition-colors"
+            >
+              <X size={16} />
+            </button>
+
+            {/* Content */}
+            <div className="px-6 pt-5 pb-6 space-y-5">
+              {/* App identity */}
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1D9E75] to-[#0A5C43] flex items-center justify-center shrink-0 shadow-lg shadow-emerald-900/40">
+                  <span className="text-white text-3xl font-black leading-none select-none">P</span>
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold text-white">Orbit for Android</h2>
+                  <p className="text-sm text-slate-400">Your subscription tracker · on the go</p>
+                  <div className="flex items-center gap-1.5 mt-1.5">
+                    {[1,2,3,4,5].map(i => (
+                      <Star key={i} size={11} className="text-amber-400 fill-amber-400" />
+                    ))}
+                    <span className="text-xs text-slate-500 ml-1">Companion app</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Features */}
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { icon: Wifi,       label: 'Auto usage sync'     },
+                  { icon: BarChart2,  label: 'Live analytics'       },
+                  { icon: Target,     label: 'Track your goals'     },
+                  { icon: Smartphone, label: 'Orbit AI on mobile'   },
+                ].map(({ icon: Icon, label }) => (
+                  <div key={label} className="flex items-center gap-2 bg-white/4 border border-white/6 rounded-xl px-3 py-2.5">
+                    <Icon size={13} className="text-emerald-400 shrink-0" />
+                    <span className="text-xs text-slate-300">{label}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Key selling point */}
+              <div className="flex items-start gap-3 bg-emerald-500/[0.07] border border-emerald-500/20 rounded-xl px-4 py-3">
+                <Wifi size={15} className="text-emerald-400 shrink-0 mt-0.5" />
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  The Android app automatically tracks which apps you use and how long —
+                  no manual logging needed. Your Analytics charts update every hour.
+                </p>
+              </div>
+
+              {/* Install steps (compact) */}
+              <div className="space-y-2">
+                <p className="text-xs text-slate-500 uppercase tracking-wide font-semibold">How to install</p>
+                {[
+                  'Download the APK below',
+                  'Enable "Install unknown apps" in Android settings',
+                  'Open the APK and tap Install',
+                  'Grant Usage access and log in with your account',
+                ].map((step, i) => (
+                  <div key={i} className="flex items-center gap-2.5 text-xs text-slate-400">
+                    <span className="w-4 h-4 rounded-full bg-white/8 text-white flex items-center justify-center shrink-0 text-[10px] font-bold">
+                      {i + 1}
+                    </span>
+                    {step}
+                  </div>
+                ))}
+              </div>
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-2 pt-1">
+                <a
+                  href={APK_URL}
+                  download
+                  className="btn-primary justify-center gap-2 flex-1"
+                  onClick={onClose}
+                >
+                  <Download size={15} /> Download APK
+                </a>
+                <a
+                  href={RELEASE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary justify-center text-sm"
+                >
+                  GitHub releases
+                </a>
+              </div>
+
+              {/* Security */}
+              <div className="flex items-center gap-2 text-xs text-slate-500">
+                <Shield size={11} className="shrink-0" />
+                Open source — verify the APK at github.com/adithyx-0/Orbit
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}
+
 // ── Android App card ───────────────────────────────────────────
 
 const APK_URL     = 'https://github.com/adithyx-0/Orbit/releases/latest/download/orbit-release.apk'
@@ -371,7 +519,7 @@ const INSTALL_STEPS = [
   { n: '5', title: 'Log in', body: 'Use the same email and password as your web account — your data syncs instantly.' },
 ]
 
-function AndroidAppCard() {
+function AndroidAppCard({ onOpenModal }) {
   const [showSteps, setShowSteps] = useState(false)
 
   return (
@@ -406,20 +554,18 @@ function AndroidAppCard() {
 
       {/* Action buttons */}
       <div className="flex flex-wrap items-center gap-2 px-5 pb-5">
+        <button
+          onClick={onOpenModal}
+          className="btn-primary gap-2 text-sm"
+        >
+          <Smartphone size={14} /> Get the app
+        </button>
         <a
           href={APK_URL}
           download
-          className="btn-primary gap-2 text-sm"
+          className="btn-secondary gap-2 text-sm"
         >
           <Download size={14} /> Download APK
-        </a>
-        <a
-          href={RELEASE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-secondary text-sm"
-        >
-          View releases on GitHub
         </a>
         <button
           onClick={() => setShowSteps(v => !v)}
@@ -462,6 +608,22 @@ function AndroidAppCard() {
 export default function Settings() {
   const { user, logout } = useAuth()
   const { subscriptions } = useData()
+
+  const [showAppModal, setShowAppModal] = useState(false)
+
+  // Auto-show the install modal once per session
+  useEffect(() => {
+    const seen = sessionStorage.getItem('orbit.app-modal-seen')
+    if (!seen) {
+      const t = setTimeout(() => setShowAppModal(true), 800)
+      return () => clearTimeout(t)
+    }
+  }, [])
+
+  const closeAppModal = () => {
+    sessionStorage.setItem('orbit.app-modal-seen', '1')
+    setShowAppModal(false)
+  }
 
   const [usageForm,  setUsageForm]  = useState({
     date:     new Date().toISOString().slice(0, 10),
@@ -540,7 +702,10 @@ export default function Settings() {
       <AgentsCard />
 
       {/* Android app download */}
-      <AndroidAppCard />
+      <AndroidAppCard onOpenModal={() => setShowAppModal(true)} />
+
+      {/* Android install modal */}
+      <AndroidInstallModal open={showAppModal} onClose={closeAppModal} />
 
       {/* Log usage manually */}
       <div className="card p-6">
