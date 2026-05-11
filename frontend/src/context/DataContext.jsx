@@ -30,6 +30,7 @@ function toDateStr(v) {
 function toCamel(s) {
   return {
     ...s,
+    cost:            parseFloat(s.cost) || 0,
     billingCycle:    s.billing_cycle,
     hoursThisMonth:  parseFloat(s.hours_this_month || 0),
     renewsOn:        toDateStr(s.renews_on),
