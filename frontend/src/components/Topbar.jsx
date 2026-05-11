@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { LogOut, Bell, Menu } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useAuth } from '../context/AuthContext.jsx'
+import ThemeToggle from './ThemeToggle.jsx'
 
 export default function Topbar({ onMenuClick }) {
   const { user, logout } = useAuth()
@@ -39,8 +40,10 @@ export default function Topbar({ onMenuClick }) {
         </div>
       </div>
 
-      {/* Right: notification bell + avatar + sign-out */}
+      {/* Right: theme toggle + notification bell + avatar + sign-out */}
       <div className="flex items-center gap-2">
+        <ThemeToggle />
+
         <motion.button
           whileTap={{ scale: 0.9 }}
           className="relative p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/8 transition-colors"
