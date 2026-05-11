@@ -1,11 +1,12 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Plus, Bell, X } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Plus, Bell, X, CreditCard, BarChart3, Sparkles, Database } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useData } from '../context/DataContext.jsx'
 import { useRenewalNotifications } from '../hooks/useRenewalNotifications.js'
 import { buildRecommendations } from '../lib/recommendations.js'
 import { fadeInUp } from '../lib/motion.js'
+import api from '../lib/api.js'
 
 import DashboardSkeleton from '../components/dashboard/DashboardSkeleton.jsx'
 import StatsRow from '../components/dashboard/StatsRow.jsx'
@@ -15,6 +16,73 @@ import RecommendationsCard from '../components/dashboard/RecommendationsCard.jsx
 import QuickSubscriptions from '../components/dashboard/QuickSubscriptions.jsx'
 import UpcomingRenewals from '../components/dashboard/UpcomingRenewals.jsx'
 import { StarTreeWidget, UserScoreWidget } from '../components/gamification/index.js'
+
+function DashboardWelcome() {
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+
+  const loadDemo = async () => {
+    setLoading(true)
+    try {
+      await api.post('/seed')
+      window.location.reload()
+    } catch {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.4, 0.25, 1] }}
+      className="flex flex-col items-center text-center py-16 px-4 max-w-lg mx-auto"
+    >
+      {/* Icon */}
+      <div className="w-16 h-16 rounded-2xl bg-brand-600/10 border border-brand-500/20 flex items-center justify-center mb-6 shadow-glow-sm">
+        <CreditCard size={26} className="text-brand-400" />
+      </div>
+
+      <h2 className="text-xl font-bold mb-2" style={{ color: 'var(--c-text)' }}>
+        Welcome to Prosit!
+      </h2>
+      <p className="text-sm text-slate-500 mb-10 leading-relaxed max-w-sm">
+        Track every subscription, see where your money goes, and get AI-powered recommendations to cut waste.
+      </p>
+
+      {/* Steps */}
+      <div className="grid grid-cols-3 gap-3 w-full mb-10">
+        {[
+          { icon: CreditCard, label: 'Add your subscriptions', step: '1', color: 'text-brand-400', bg: 'bg-brand-500/10' },
+          { icon: BarChart3,  label: 'Track usage over time',  step: '2', color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
+          { icon: Sparkles,   label: 'Get AI insights',        step: '3', color: 'text-purple-400',  bg: 'bg-purple-500/10' },
+        ].map(({ icon: Icon, label, step, color, bg }) => (
+          <div key={step} className="card p-4 flex flex-col items-center gap-2.5">
+            <div className={`w-7 h-7 rounded-full ${bg} flex items-center justify-center text-xs font-bold ${color}`}>
+              {step}
+            </div>
+            <Icon size={15} className={color} />
+            <p className="text-xs text-slate-500 text-center leading-snug">{label}</p>
+          </div>
+        ))}
+      </div>
+
+      <Link to="/subscriptions" className="btn-primary text-sm px-6 py-2.5">
+        <Plus size={15} />
+        Add your first subscription
+      </Link>
+
+      <button
+        onClick={loadDemo}
+        disabled={loading}
+        className="mt-4 text-xs text-slate-500 hover:text-slate-300 transition-colors flex items-center gap-1.5"
+      >
+        <Database size={11} />
+        {loading ? 'Loading demo…' : 'Or explore with demo data →'}
+      </button>
+    </motion.div>
+  )
+}
 
 export default function Dashboard() {
   const { subscriptions, goals, usage, loading, error } = useData()
@@ -104,27 +172,33 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* KPI row */}
-      <StatsRow stats={stats} />
+      {subscriptions.length === 0 ? (
+        <DashboardWelcome />
+      ) : (
+        <>
+          {/* KPI row */}
+          <StatsRow stats={stats} />
 
-      {/* Charts */}
-      <div className="grid lg:grid-cols-3 gap-5">
-        <UsageTrendChart data={usage} />
-        <SpendDonut data={byCategory} />
-      </div>
+          {/* Charts */}
+          <div className="grid lg:grid-cols-3 gap-5">
+            <UsageTrendChart data={usage} />
+            <SpendDonut data={byCategory} />
+          </div>
 
-      {/* AI recommendations */}
-      <RecommendationsCard recommendations={recommendations} />
+          {/* AI recommendations */}
+          <RecommendationsCard recommendations={recommendations} />
 
-      {/* User score + level progression */}
-      <UserScoreWidget />
+          {/* User score + level progression */}
+          <UserScoreWidget />
 
-      {/* Bottom row */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <QuickSubscriptions subscriptions={subscriptions} />
-        <UpcomingRenewals subscriptions={subscriptions} />
-        <StarTreeWidget />
-      </div>
+          {/* Bottom row */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <QuickSubscriptions subscriptions={subscriptions} />
+            <UpcomingRenewals subscriptions={subscriptions} />
+            <StarTreeWidget />
+          </div>
+        </>
+      )}
     </div>
   )
 }

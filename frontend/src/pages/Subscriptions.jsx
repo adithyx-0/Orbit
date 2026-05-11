@@ -527,11 +527,29 @@ export default function Subscriptions() {
 
       {/* Card grid */}
       {filtered.length === 0 ? (
-        <div className="card py-16 text-center text-slate-500">
-          {subscriptions.length === 0
-            ? 'No subscriptions yet — add your first one.'
-            : 'No subscriptions match the current filter.'}
-        </div>
+        subscriptions.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className="card py-16 px-8 flex flex-col items-center text-center"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-brand-600/10 border border-brand-500/20 flex items-center justify-center mb-5">
+              <CreditCard size={22} className="text-brand-400" />
+            </div>
+            <h3 className="font-semibold mb-1.5" style={{ color: 'var(--c-text)' }}>No subscriptions yet</h3>
+            <p className="text-sm text-slate-500 mb-6 max-w-xs leading-relaxed">
+              Add your first subscription to start tracking your spend, usage, and ROI.
+            </p>
+            <button onClick={() => setOpenAdd(true)} className="btn-primary">
+              <Plus size={15} /> Add subscription
+            </button>
+          </motion.div>
+        ) : (
+          <div className="card py-12 text-center text-sm text-slate-500">
+            No subscriptions match the current filter.
+          </div>
+        )
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
           {filtered.map(s => (
