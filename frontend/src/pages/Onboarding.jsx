@@ -55,7 +55,7 @@ function Landing({ onStart }) {
         {/* Logo */}
         <div className="flex items-center justify-center gap-2.5 mb-12">
           <div className="w-11 h-11 rounded-xl bg-brand-600 flex items-center justify-center font-black text-white text-xl shadow-lg shadow-brand-900/40">
-            O
+            P
           </div>
           <span className="text-2xl font-bold tracking-tight">Prosit</span>
         </div>

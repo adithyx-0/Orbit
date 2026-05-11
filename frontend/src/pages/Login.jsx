@@ -36,7 +36,7 @@ export default function Login() {
       <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-brand-700 via-brand-800 to-[#0d0d2e] text-white p-12 flex-col justify-between relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(99,102,241,0.15)_0%,_transparent_60%)]" />
         <div className="relative flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center font-black text-lg">O</div>
+          <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center font-black text-lg">P</div>
           <span className="font-bold tracking-wide text-lg">Prosit</span>
         </div>
         <div className="relative">
@@ -67,7 +67,7 @@ export default function Login() {
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
           <div className="flex items-center gap-2 mb-8 lg:hidden">
-            <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center font-black text-white text-sm">O</div>
+            <div className="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center font-black text-white text-sm">P</div>
             <span className="font-bold">Prosit</span>
           </div>
 
