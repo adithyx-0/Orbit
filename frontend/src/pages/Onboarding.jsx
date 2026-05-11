@@ -161,7 +161,7 @@ export default function Onboarding() {
   const stepContent = {
     1: {
       title:    'What do you subscribe to?',
-      subtitle: 'Select all that apply — we'll tailor your experience.',
+      subtitle: "Select all that apply — we'll tailor your experience.",
       node: (
         <div className="grid grid-cols-2 gap-2">
           {CATEGORIES.map(c => {
@@ -190,7 +190,7 @@ export default function Onboarding() {
       canNext: true,
     },
     2: {
-      title:    'What's your monthly budget?',
+      title:    "What's your monthly budget?",
       subtitle: 'Orbit will flag anything that goes over your limit.',
       node: (
         <div className="space-y-2">
@@ -254,7 +254,7 @@ export default function Onboarding() {
     },
     4: {
       title:    'Create your account',
-      subtitle: 'One step away — your data stays private and secure.',
+      subtitle: "One step away — your data stays private and secure.",
       node: (
         <form id="signup-form" onSubmit={submit} className="space-y-4">
           {error && (
