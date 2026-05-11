@@ -1,8 +1,9 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Plus } from 'lucide-react'
+import { Plus, Bell, X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useData } from '../context/DataContext.jsx'
+import { useRenewalNotifications } from '../hooks/useRenewalNotifications.js'
 import { buildRecommendations } from '../lib/recommendations.js'
 import { fadeInUp } from '../lib/motion.js'
 
@@ -17,6 +18,8 @@ import { StarTreeWidget, UserScoreWidget } from '../components/gamification/inde
 
 export default function Dashboard() {
   const { subscriptions, goals, usage, loading, error } = useData()
+  const { permission, upcoming, requestPermission } = useRenewalNotifications()
+  const [bannerDismissed, setBannerDismissed] = useState(false)
 
   // All hooks MUST run before any conditional return
   const stats = useMemo(() => {
@@ -76,6 +79,30 @@ export default function Dashboard() {
           Add subscription
         </Link>
       </motion.div>
+
+      {/* Notification permission prompt — only if not granted and renewals are due */}
+      {permission === 'default' && upcoming.length > 0 && !bannerDismissed && (
+        <div className="flex items-center justify-between gap-4 px-4 py-3 rounded-xl bg-amber-500/8 border border-amber-500/20">
+          <div className="flex items-center gap-3 min-w-0">
+            <Bell size={15} className="text-amber-400 shrink-0" />
+            <p className="text-sm text-slate-300">
+              You have <span className="font-semibold text-amber-400">{upcoming.length}</span> subscription{upcoming.length > 1 ? 's' : ''} renewing soon — enable notifications to get alerts before you're charged.
+            </p>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <button onClick={requestPermission} className="btn-primary text-xs">
+              Enable
+            </button>
+            <button
+              onClick={() => setBannerDismissed(true)}
+              className="p-1.5 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/6 transition-colors"
+              aria-label="Dismiss"
+            >
+              <X size={13} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* KPI row */}
       <StatsRow stats={stats} />

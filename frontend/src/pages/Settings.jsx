@@ -98,8 +98,6 @@ function NotificationsCard({ subscriptions }) {
     })
   }, [perm, upcoming])
 
-  // Auto-notify on mount if permission already granted
-  useEffect(() => { notifyAll() }, [notifyAll])
 
   return (
     <div className="card p-6 space-y-5">

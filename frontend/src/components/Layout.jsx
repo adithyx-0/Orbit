@@ -6,9 +6,11 @@ import Topbar from './Topbar.jsx'
 import ChatWidget from './ChatWidget.jsx'
 import ErrorBoundary from './ErrorBoundary.jsx'
 import { pageTransition } from '../lib/motion.js'
+import { useRenewalNotifications } from '../hooks/useRenewalNotifications.js'
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  useRenewalNotifications() // fires browser alerts globally once per day
   const location = useLocation()
 
   return (
