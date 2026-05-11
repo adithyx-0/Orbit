@@ -38,13 +38,25 @@ export function AuthProvider({ children }) {
     }
   }
 
+  const updateProfile = async ({ name, currentPassword, newPassword }) => {
+    try {
+      const { data } = await api.put('/auth/profile', { name, currentPassword, newPassword })
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}')
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...stored, user: data.user }))
+      setUser(data.user)
+      return data
+    } catch (err) {
+      throw new Error(err.response?.data?.error || err.message || 'Update failed')
+    }
+  }
+
   const logout = () => {
     localStorage.removeItem(STORAGE_KEY)
     setUser(null)
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, signup, logout, updateProfile }}>
       {children}
     </AuthContext.Provider>
   )

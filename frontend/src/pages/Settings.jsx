@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import {
   CheckCircle2, Bell, BellOff, Smartphone, Monitor, Copy, Check,
   ChevronDown, ChevronUp, RefreshCw, Trash2, Database, Download,
-  Wifi, BarChart2, Target, Shield, X, Star,
+  Wifi, BarChart2, Target, Shield, X, Star, User, Lock,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext.jsx'
 import { useData } from '../context/DataContext.jsx'
@@ -603,8 +603,129 @@ function AndroidAppCard({ onOpenModal }) {
 
 // ── Page ───────────────────────────────────────────────────────
 
+// ── Profile / account management ──────────────────────────────
+
+function ProfileCard({ user, updateProfile, logout }) {
+  const [name,            setName]            = useState(user?.name || '')
+  const [profileSaving,   setProfileSaving]   = useState(false)
+  const [profileMsg,      setProfileMsg]      = useState(null) // { type: 'ok'|'err', text }
+
+  const [currentPw,  setCurrentPw]  = useState('')
+  const [newPw,      setNewPw]      = useState('')
+  const [confirmPw,  setConfirmPw]  = useState('')
+  const [pwSaving,   setPwSaving]   = useState(false)
+  const [pwMsg,      setPwMsg]      = useState(null)
+
+  const saveProfile = async (e) => {
+    e.preventDefault()
+    if (!name.trim()) return
+    setProfileSaving(true)
+    setProfileMsg(null)
+    try {
+      await updateProfile({ name })
+      setProfileMsg({ type: 'ok', text: 'Name updated.' })
+    } catch (err) {
+      setProfileMsg({ type: 'err', text: err.message })
+    } finally {
+      setProfileSaving(false)
+    }
+  }
+
+  const savePassword = async (e) => {
+    e.preventDefault()
+    if (newPw !== confirmPw) {
+      setPwMsg({ type: 'err', text: 'New passwords do not match.' })
+      return
+    }
+    setPwSaving(true)
+    setPwMsg(null)
+    try {
+      await updateProfile({ currentPassword: currentPw, newPassword: newPw })
+      setPwMsg({ type: 'ok', text: 'Password changed.' })
+      setCurrentPw(''); setNewPw(''); setConfirmPw('')
+    } catch (err) {
+      setPwMsg({ type: 'err', text: err.message })
+    } finally {
+      setPwSaving(false)
+    }
+  }
+
+  return (
+    <div className="card p-6 space-y-6">
+      <h2 className="font-semibold">Account</h2>
+
+      {/* ── Profile name ── */}
+      <form onSubmit={saveProfile} className="space-y-4">
+        <div className="flex items-center gap-2 mb-1">
+          <User size={13} className="text-slate-500" />
+          <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--c-text-3)' }}>Profile</span>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <div>
+            <label className="label">Display name</label>
+            <input
+              className="input"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label className="label">Email</label>
+            <input className="input opacity-50 cursor-not-allowed" value={user?.email || ''} readOnly />
+          </div>
+        </div>
+        {profileMsg && (
+          <p className={`text-sm ${profileMsg.type === 'ok' ? 'text-emerald-400' : 'text-red-400'}`}>
+            {profileMsg.text}
+          </p>
+        )}
+        <button type="submit" className="btn-primary text-sm" disabled={profileSaving || !name.trim() || name === user?.name}>
+          {profileSaving ? 'Saving…' : 'Save name'}
+        </button>
+      </form>
+
+      <div className="divider" />
+
+      {/* ── Change password ── */}
+      <form onSubmit={savePassword} className="space-y-4">
+        <div className="flex items-center gap-2 mb-1">
+          <Lock size={13} className="text-slate-500" />
+          <span className="text-xs font-semibold uppercase tracking-wide" style={{ color: 'var(--c-text-3)' }}>Change password</span>
+        </div>
+        <div className="grid sm:grid-cols-3 gap-3">
+          <div>
+            <label className="label">Current password</label>
+            <input type="password" className="input" value={currentPw} onChange={e => setCurrentPw(e.target.value)} required />
+          </div>
+          <div>
+            <label className="label">New password</label>
+            <input type="password" className="input" value={newPw} onChange={e => setNewPw(e.target.value)} minLength={6} required />
+          </div>
+          <div>
+            <label className="label">Confirm new</label>
+            <input type="password" className="input" value={confirmPw} onChange={e => setConfirmPw(e.target.value)} required />
+          </div>
+        </div>
+        {pwMsg && (
+          <p className={`text-sm ${pwMsg.type === 'ok' ? 'text-emerald-400' : 'text-red-400'}`}>
+            {pwMsg.text}
+          </p>
+        )}
+        <button type="submit" className="btn-secondary text-sm" disabled={pwSaving || !currentPw || !newPw || !confirmPw}>
+          {pwSaving ? 'Updating…' : 'Change password'}
+        </button>
+      </form>
+
+      <div className="divider" />
+
+      <button onClick={logout} className="btn-danger text-sm">Sign out</button>
+    </div>
+  )
+}
+
 export default function Settings() {
-  const { user, logout } = useAuth()
+  const { user, logout, updateProfile } = useAuth()
   const { subscriptions } = useData()
 
   const [showAppModal,  setShowAppModal]  = useState(false)
@@ -678,21 +799,8 @@ export default function Settings() {
         <p className="text-sm text-slate-500">Manage your account and app preferences.</p>
       </div>
 
-      {/* Account — always visible */}
-      <div className="card p-6">
-        <h2 className="font-semibold mb-4">Account</h2>
-        <div className="grid sm:grid-cols-2 gap-4 text-sm">
-          <div>
-            <div className="label">Name</div>
-            <div className="font-medium text-white mt-1">{user?.name}</div>
-          </div>
-          <div>
-            <div className="label">Email</div>
-            <div className="font-medium text-white mt-1">{user?.email}</div>
-          </div>
-        </div>
-        <button onClick={logout} className="mt-5 btn-danger text-sm">Sign out</button>
-      </div>
+      {/* Profile — always visible */}
+      <ProfileCard user={user} updateProfile={updateProfile} logout={logout} />
 
       {/* Android app — always visible */}
       <AndroidAppCard onOpenModal={() => setShowAppModal(true)} />
