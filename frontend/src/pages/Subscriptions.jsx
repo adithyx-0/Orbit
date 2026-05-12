@@ -127,7 +127,8 @@ function RenewModal({ sub, onClose, onMarkRenewed }) {
       <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
 
       <motion.div
-        className="relative w-full sm:max-w-md bg-[#0d0d18] border border-white/10 rounded-t-2xl sm:rounded-2xl overflow-hidden shadow-2xl"
+        className="relative w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl overflow-hidden shadow-2xl"
+        style={{ background: 'var(--c-card-bg)', border: '1px solid var(--c-card-border)' }}
         initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 80, opacity: 0 }}
@@ -143,7 +144,7 @@ function RenewModal({ sub, onClose, onMarkRenewed }) {
         </div>
 
         {/* ── Header ── */}
-        <div className="px-5 pt-3 pb-4 border-b border-white/8 flex items-start justify-between gap-3">
+        <div className="px-5 pt-3 pb-4 flex items-start justify-between gap-3" style={{ borderBottom: '1px solid var(--c-divider)' }}>
           <div className="flex items-center gap-3">
             <div
               className="w-11 h-11 rounded-xl flex items-center justify-center text-white font-bold text-xl shrink-0"
@@ -152,7 +153,7 @@ function RenewModal({ sub, onClose, onMarkRenewed }) {
               {(sub.name || '?')[0].toUpperCase()}
             </div>
             <div>
-              <h2 className="text-white font-bold leading-tight">{sub.name}</h2>
+              <h2 className="font-bold leading-tight" style={{ color: 'var(--c-text)' }}>{sub.name}</h2>
               <p className="text-sm text-slate-400">
                 {currency(sub.cost)}
                 <span className="text-slate-600 ml-0.5">/{cycleLabel}</span>
@@ -170,7 +171,7 @@ function RenewModal({ sub, onClose, onMarkRenewed }) {
         {/* Renewal dates banner */}
         {sub.renewsOn && (
           <div className="mx-5 mt-3 px-3 py-2 bg-white/5 rounded-lg text-xs text-slate-400 flex flex-wrap items-center gap-1.5">
-            <span>Renews <span className="text-white font-medium">{sub.renewsOn}</span></span>
+            <span>Renews <span className="font-medium" style={{ color: 'var(--c-text)' }}>{sub.renewsOn}</span></span>
             {next && (
               <>
                 <span className="text-slate-600">→</span>
@@ -256,7 +257,7 @@ function RenewModal({ sub, onClose, onMarkRenewed }) {
                 {(sub.name || '?')[0].toUpperCase()}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm text-white font-medium truncate">{sub.name}</p>
+                <p className="text-sm font-medium truncate" style={{ color: 'var(--c-text)' }}>{sub.name}</p>
                 <p className="text-xs text-slate-500">Manage subscription &amp; payment</p>
               </div>
               <ExternalLink size={14} className="text-slate-500 group-hover:text-white transition-colors shrink-0" />
@@ -266,7 +267,7 @@ function RenewModal({ sub, onClose, onMarkRenewed }) {
         </div>
 
         {/* ── Footer — mark as renewed ── */}
-        <div className="px-5 pb-5 pt-3 border-t border-white/8 bg-white/[0.02]">
+        <div className="px-5 pb-5 pt-3" style={{ borderTop: '1px solid var(--c-divider)', background: 'var(--c-card-bg)' }}>
           <p className="text-[11px] text-slate-500 text-center mb-3">
             After completing your payment, confirm the renewal below
           </p>
@@ -309,7 +310,7 @@ function SubscriptionCard({ s, onEdit, onToggle, onDelete, onRenew }) {
   const cycle    = s.billingCycle || s.billing_cycle || 'monthly'
 
   return (
-    <div className="relative rounded-xl border border-white/8 bg-[#0d0d18] overflow-hidden flex flex-col transition-all hover:border-white/16 hover:shadow-lg">
+    <div className="relative rounded-xl overflow-hidden flex flex-col transition-all hover:shadow-lg" style={{ background: 'var(--c-card-bg)', border: '1px solid var(--c-card-border)' }}>
       <div className="h-0.5 w-full" style={{ background: accent }} />
 
       <div className="p-4 flex flex-col gap-3 flex-1">
@@ -317,14 +318,14 @@ function SubscriptionCard({ s, onEdit, onToggle, onDelete, onRenew }) {
         <div className="flex items-start gap-3">
           <div className="mt-1 w-2 h-2 rounded-full shrink-0" style={{ background: accent }} />
           <div className="flex-1 min-w-0">
-            <p className="font-semibold text-white truncate">{s.name}</p>
+            <p className="font-semibold truncate" style={{ color: 'var(--c-text)' }}>{s.name}</p>
             <div className="flex flex-wrap items-center gap-1.5 mt-1">
               <span className={`badge text-xs px-2 py-0.5 ${categoryColor(s.category)}`}>{s.category}</span>
               <span className={`badge text-xs px-2 py-0.5 ${statusColor(s.status)}`}>{s.status}</span>
             </div>
           </div>
           <div className="text-right shrink-0">
-            <p className="text-base font-bold text-white leading-none">
+            <p className="text-base font-bold leading-none" style={{ color: 'var(--c-text)' }}>
               {currency(s.cost)}
               <span className="text-xs text-slate-500 font-normal ml-0.5">
                 /{cycle === 'yearly' ? 'yr' : cycle === 'quarterly' ? 'q' : 'mo'}
@@ -344,7 +345,7 @@ function SubscriptionCard({ s, onEdit, onToggle, onDelete, onRenew }) {
               {hours(s.hoursThisMonth)}
             </span>
           </div>
-          <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
+          <div className="h-1.5 rounded-full overflow-hidden" style={{ background: 'var(--c-skeleton)' }}>
             <div
               className="h-full rounded-full transition-all duration-500"
               style={{ width: `${usagePct}%`, background: usageBarColor(s.hoursThisMonth) }}
@@ -359,7 +360,7 @@ function SubscriptionCard({ s, onEdit, onToggle, onDelete, onRenew }) {
         <div className="flex items-center justify-between gap-2">
           <RenewalBadge dateStr={s.renewsOn} />
           {s.paymentMethod && (
-            <span className="flex items-center gap-1 text-xs bg-white/6 border border-white/8 text-slate-400 rounded-full px-2 py-0.5">
+            <span className="flex items-center gap-1 text-xs text-slate-400 rounded-full px-2 py-0.5" style={{ background: 'var(--c-skeleton)', border: '1px solid var(--c-card-border)' }}>
               <PaymentIcon method={s.paymentMethod} />
               {s.paymentMethod}
             </span>
@@ -368,7 +369,7 @@ function SubscriptionCard({ s, onEdit, onToggle, onDelete, onRenew }) {
       </div>
 
       {/* Action bar */}
-      <div className="border-t border-white/6 px-4 py-2.5 flex items-center justify-between gap-2 bg-white/[0.02]">
+      <div className="px-4 py-2.5 flex items-center justify-between gap-2" style={{ borderTop: '1px solid var(--c-divider)', background: 'var(--c-card-bg)' }}>
         <button
           onClick={() => s.renewsOn && onRenew(s)}
           disabled={!s.renewsOn}
@@ -470,12 +471,12 @@ export default function Subscriptions() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="card p-4">
           <p className="text-xs text-slate-500 mb-1">Monthly spend</p>
-          <p className="text-xl font-bold text-white">{currency(stats.monthly)}</p>
+          <p className="text-xl font-bold" style={{ color: 'var(--c-text)' }}>{currency(stats.monthly)}</p>
           <p className="text-xs text-slate-500">normalised to /mo</p>
         </div>
         <div className="card p-4">
           <p className="text-xs text-slate-500 mb-1">Active services</p>
-          <p className="text-xl font-bold text-white">{stats.active}</p>
+          <p className="text-xl font-bold" style={{ color: 'var(--c-text)' }}>{stats.active}</p>
           <p className="text-xs text-slate-500">of {subscriptions.length} total</p>
         </div>
         <div className="card p-4">
@@ -485,7 +486,7 @@ export default function Subscriptions() {
         </div>
         <div className="card p-4">
           <p className="text-xs text-slate-500 mb-1">Avg cost / hour</p>
-          <p className="text-xl font-bold text-white">{stats.avgCph ? currency(stats.avgCph) : '—'}</p>
+          <p className="text-xl font-bold" style={{ color: 'var(--c-text)' }}>{stats.avgCph ? currency(stats.avgCph) : '—'}</p>
           <p className="text-xs text-slate-500">across active subs</p>
         </div>
       </div>
@@ -503,11 +504,10 @@ export default function Subscriptions() {
             <button
               key={c}
               onClick={() => setFilter(c)}
-              className={`badge px-3 py-1 border transition text-xs ${
-                filter === c
-                  ? 'bg-brand-600 text-white border-brand-600'
-                  : 'bg-white/6 text-slate-400 border-white/8 hover:bg-white/10 hover:text-white'
-              }`}
+              className={`badge px-3 py-1 transition text-xs ${filter === c ? 'bg-brand-600 text-white' : 'text-slate-400 hover:text-white'}`}
+              style={filter === c
+                ? {}
+                : { background: 'var(--c-skeleton)', border: '1px solid var(--c-card-border)' }}
             >
               {c}
             </button>

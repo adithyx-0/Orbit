@@ -100,7 +100,7 @@ function GoalCard({ goal, onUpdate, onDelete, onEdit, celebrating }) {
 
       {/* Title */}
       <div>
-        <h3 className="text-sm font-semibold text-white leading-snug">{goal.title}</h3>
+        <h3 className="text-sm font-semibold leading-snug" style={{ color: 'var(--c-text)' }}>{goal.title}</h3>
         {goal.target_hours_per_week > 0 && (
           <p className="text-xs text-slate-500 mt-0.5">{goal.target_hours_per_week} h/week target</p>
         )}
@@ -116,7 +116,7 @@ function GoalCard({ goal, onUpdate, onDelete, onEdit, celebrating }) {
         </div>
 
         {/* Animated bar */}
-        <div className="h-2 bg-white/6 rounded-full overflow-hidden mb-2">
+        <div className="h-2 rounded-full overflow-hidden mb-2" style={{ background: 'var(--c-skeleton)' }}>
           <motion.div
             className="h-full rounded-full"
             initial={false}
@@ -160,11 +160,12 @@ function GoalCard({ goal, onUpdate, onDelete, onEdit, celebrating }) {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             transition={{ type: 'spring', stiffness: 300, damping: 16 }}
-            className="flex items-center gap-1.5 text-xs font-semibold text-amber-400 justify-center pt-1 border-t border-white/6"
+            className="flex items-center gap-1.5 text-xs font-semibold text-amber-400 justify-center pt-1"
+            style={{ borderTop: '1px solid var(--c-divider)' }}
           >
             <CheckCircle2 size={13} />
-            Completed Â· great work!
-            <span className="text-sm">â­</span>
+            Completed · great work!
+            <span className="text-sm">⭐</span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -249,11 +250,11 @@ function TreePanel({ goals }) {
         <div className="w-full max-w-[180px] mx-auto aspect-square">
           <TreeSvg filledCount={starCount} />
         </div>
-        <div className="mt-4 pt-4 border-t border-white/6 flex items-center justify-around text-center">
+        <div className="mt-4 pt-4 flex items-center justify-around text-center" style={{ borderTop: '1px solid var(--c-divider)' }}>
           <Stat value={starCount}  label="Stars" />
-          <div className="w-px h-8 bg-white/6" />
+          <div className="w-px h-8" style={{ background: 'var(--c-divider)' }} />
           <Stat value={completed}  label="Done" />
-          <div className="w-px h-8 bg-white/6" />
+          <div className="w-px h-8" style={{ background: 'var(--c-divider)' }} />
           <Stat value={goals.length - completed} label="Active" />
         </div>
       </div>
@@ -268,14 +269,14 @@ function TreePanel({ goals }) {
         'card p-4 flex items-center gap-3',
         streak?.currentStreak > 0 && 'border-amber-500/20 bg-amber-500/[0.04]'
       )}>
-        <div className={cn(
-          'w-9 h-9 rounded-xl flex items-center justify-center shrink-0',
-          streak?.currentStreak > 0 ? 'bg-amber-500/15' : 'bg-white/6'
-        )}>
+        <div
+          className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+          style={{ background: streak?.currentStreak > 0 ? 'rgba(245,158,11,0.15)' : 'var(--c-skeleton)' }}
+        >
           <Flame size={16} className={streak?.currentStreak > 0 ? 'text-amber-400' : 'text-slate-500'} />
         </div>
         <div>
-          <p className="text-lg font-bold text-white leading-none">
+          <p className="text-lg font-bold leading-none" style={{ color: 'var(--c-text)' }}>
             {streak?.currentStreak ?? 0}
             <span className="text-xs text-slate-500 font-normal ml-1">day streak</span>
           </p>
@@ -304,7 +305,7 @@ function TreePanel({ goals }) {
 function Stat({ value, label }) {
   return (
     <div>
-      <div className="text-lg font-bold text-white">{value}</div>
+      <div className="text-lg font-bold" style={{ color: 'var(--c-text)' }}>{value}</div>
       <div className="text-[10px] text-slate-500 mt-0.5">{label}</div>
     </div>
   )
@@ -314,7 +315,7 @@ function Stat({ value, label }) {
 function GoalGroup({ title, goals, onUpdate, onDelete, onEdit, celebrating }) {
   return (
     <div>
-      <p className="micro-label mb-3">{title} Â· {goals.length}</p>
+      <p className="micro-label mb-3">{title} · {goals.length}</p>
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -386,7 +387,7 @@ export default function Goals() {
         <div>
           <p className="micro-label mb-1">Gamification</p>
           <h1 className="page-title">Goals</h1>
-          <p className="page-subtitle mt-1">Complete goals Â· earn stars Â· grow your tree.</p>
+          <p className="page-subtitle mt-1">Complete goals · earn stars · grow your tree.</p>
         </div>
         <button className="btn-primary shrink-0" onClick={() => setOpenAdd(true)}>
           <Plus size={15} className="-ml-0.5" /> New goal
@@ -397,7 +398,7 @@ export default function Goals() {
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="card p-4">
           <p className="text-xs text-slate-500 mb-1">Total goals</p>
-          <p className="text-xl font-bold text-white">{goals.length}</p>
+          <p className="text-xl font-bold" style={{ color: 'var(--c-text)' }}>{goals.length}</p>
         </div>
         <div className="card p-4">
           <p className="text-xs text-slate-500 mb-1">In progress</p>
@@ -427,7 +428,7 @@ export default function Goals() {
               className="card p-12 text-center"
             >
               <div className="w-12 h-12 rounded-full bg-amber-400/10 border border-amber-400/20 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl select-none">â­</span>
+                <span className="text-2xl select-none">⭐</span>
               </div>
               <p className="text-slate-400 text-sm mb-4">
                 No goals yet. Add one to start growing your Star Tree.
@@ -456,7 +457,7 @@ export default function Goals() {
           {/* AI coaching panel */}
           {goals.length > 0 && (
             <AiPanel
-              title="Prosit AI Â· Goal Coach"
+              title="Prosit AI · Goal Coach"
               subtitle="Get personalised coaching based on your current progress"
               prompt="Review all my goals, their progress percentages, and deadlines. Which goals am I at risk of missing? What should I focus on this week? Give me practical, motivating coaching advice in 3-4 bullet points."
             />

@@ -499,8 +499,8 @@ function AndroidInstallModal({ open, onClose }) {
 
 // ── Android App card ───────────────────────────────────────────
 
-const APK_URL     = 'https://github.com/adithyx-0/Prosit/releases/latest/download/prosit-release.apk'
-const RELEASE_URL = 'https://github.com/adithyx-0/Prosit/releases/latest'
+const APK_URL     = '/prosit.apk'
+const RELEASE_URL = '/prosit.apk'
 
 const APP_FEATURES = [
   { icon: Wifi,      text: 'Auto-tracks app usage in the background via Android UsageStats' },
